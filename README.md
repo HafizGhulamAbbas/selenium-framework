@@ -1,1 +1,32 @@
 # selenium-framework
+
+### Core Principles
+1. Less is more
+2. Clear intention
+3. Independent
+4. Good vs bad rather than Right vs wrong or Best vs worse
+5. The code will tell
+
+
+###### Let's have a look on the existing code, find bad practices and check how can we remove the those bad practices. 
+
+### Remove Bad Practices Checklist
+- [ ] Non-atomic test (Add to cart, login and checkout should not interdependent) —> Discrete tests
+- [ ] Code duplication
+- [ ] Duplicate element definitions —> POM
+- [ ] User & Application state dependencies (login & checkout | only checkout) —> Create state
+- [ ] Non-readable tests —> POM & Good naming convention
+- [ ] Duplicate driver initialisation code —> TestNG Annotations
+- [ ] Static sleeps —> Explicit waits
+- [ ] Hardcoded test data —> Constants / Enums
+- [ ] Hardcoded static text —> XMLs
+- [ ] Lacking multiple browser support —> System parameters
+- [ ] Lacking multiple environment support
+- [ ] Hardcoded driver executable path and manual driver management —> Auto discovery
+- [ ] Stale browser instances (driver not quit if test case fail)
+
+###### Last, but not the least:
+
+1. The selenium imports should not be in test cases
+2. Test cases should describe what it is testing, not how it is testing
+3. Test cases should be changed only when requirement is change, not the implementation
