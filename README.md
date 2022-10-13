@@ -37,3 +37,22 @@
 - SRP - Single Responsibility Principle
 - OOP - Encapsulation, Inheritance, Composition and Interface and polymorphism
 - POM - Page Object Model
+
+### POM (Page Object Model) Design
+- Each page is represented by a class
+- Contains the UI element definitions and the methods for user actions
+- Fluent Interface and builder pattern
+
+**Advantages:**
+- Encapsulation
+- Some level of SRP
+- Reusability
+- Readability
+- Low maintenance
+
+**Thumb rules:**
+- Good names
+- Private variables
+- No assertion (expect for asserting the page title)
+- No other task other than the user action
+- Avoid bulky page objects
