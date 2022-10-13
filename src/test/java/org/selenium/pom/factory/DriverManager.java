@@ -1,4 +1,4 @@
-package org.selenium.factory;
+package org.selenium.pom.factory;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;

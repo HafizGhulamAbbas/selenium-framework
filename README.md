@@ -56,3 +56,8 @@
 - No assertion (expect for asserting the page title)
 - No other task other than the user action
 - Avoid bulky page objects
+
+
+
+### Instructions
+1. Keep the BasePage and BaseTest as simple as can
