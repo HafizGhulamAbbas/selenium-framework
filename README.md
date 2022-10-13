@@ -61,3 +61,6 @@
 
 ### Instructions
 1. Keep the BasePage and BaseTest as simple as can
+
+### Concepts
+1. After action, if reload new page, then return the object of that page --> **Fluent Interface**

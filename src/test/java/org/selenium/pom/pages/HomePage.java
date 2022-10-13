@@ -12,7 +12,8 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
-    public void clickStoreMenuLink() {
+    public StorePage clickStoreMenuLink() {
         driver.findElement(storeMenuLink).click();
+        return new StorePage(driver);
     }
 }
