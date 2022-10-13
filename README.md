@@ -30,3 +30,10 @@
 1. The selenium imports should not be in test cases
 2. Test cases should describe what it is testing, not how it is testing
 3. Test cases should be changed only when requirement is change, not the implementation
+
+### Framework Objectives
+- Readable, Maintainable, and Scalable
+- DRY - Don’t Repeat Yourself
+- SRP - Single Responsibility Principle
+- OOP - Encapsulation, Inheritance, Composition and Interface and polymorphism
+- POM - Page Object Model
