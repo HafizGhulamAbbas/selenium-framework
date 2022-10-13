@@ -1,18 +1,13 @@
 package org.selenium;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.selenium.pom.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class AppTest
-{
+public class AppTest extends BaseTest {
     @Test
     public void guestCheckoutUsingDirectBankTransfer(){
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
         driver.get("https://askomdch.com/");
         driver.findElement(By.cssSelector("#menu-item-1227 > a")).click();
         try {
@@ -59,13 +54,10 @@ public class AppTest
                 driver.findElement(By.cssSelector(".woocommerce-notice")).getText(),
                 "Thank you. Your order has been received."
         );
-        driver.quit();
     }
 
     @Test
     public void loginAndCheckoutUsingDirectBankTransfer(){
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
         driver.get("https://askomdch.com/");
         driver.findElement(By.cssSelector("#menu-item-1227 > a")).click();
         try {
@@ -122,6 +114,5 @@ public class AppTest
                 driver.findElement(By.cssSelector(".woocommerce-notice")).getText(),
                 "Thank you. Your order has been received."
         );
-        driver.quit();
     }
 }
