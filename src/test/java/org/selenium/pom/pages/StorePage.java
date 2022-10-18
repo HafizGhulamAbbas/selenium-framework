@@ -27,4 +27,16 @@ public class StorePage extends BasePage {
         driver.findElement(addToCartButton).click();
         return this;
     }
+    public StorePage searchProduct(String name) {
+        driver.findElement(searchInput).sendKeys(name);
+        driver.findElement(searchButton).click();
+        return this;
+    }
+
+    // OR make the enterProductInSearchField and clickSearchButton as private and call them in a public class method
+
+    public StorePage searchAProduct(String name) {
+        enterProductInSearchField(name).clickSearchButton();
+        return this;
+    }
 }
