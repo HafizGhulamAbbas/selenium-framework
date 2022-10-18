@@ -12,16 +12,19 @@ public class StorePage extends BasePage {
     public StorePage(WebDriver driver) {
         super(driver);
     }
-    public void enterProductInSearchField(String name) {
+    public StorePage enterProductInSearchField(String name) {
         driver.findElement(searchInput).sendKeys(name);
+        return this;
     }
-    public void clickSearchButton() {
+    public StorePage clickSearchButton() {
         driver.findElement(searchButton).click();
+        return this;
     }
     public String getTitle() {
         return driver.findElement(title).getText();
     }
-    public void clickAddToCard() {
+    public StorePage clickAddToCard() {
         driver.findElement(addToCartButton).click();
+        return this;
     }
 }

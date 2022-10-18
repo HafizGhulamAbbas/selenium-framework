@@ -15,8 +15,9 @@ public class AppTest extends BaseTest {
         HomePage homePage = new HomePage(driver);
         // Benefit of Fluent Interface
         StorePage storePage = homePage.clickStoreMenuLink(); // homePage.clickStoreMenuLink() will return a StorePage object. So, no need to instantiate StorePage object.
-        storePage.enterProductInSearchField("Blue");
-        storePage.clickSearchButton();
+        storePage
+                .enterProductInSearchField("Blue")
+                .clickSearchButton();
         Assert.assertEquals(storePage.getTitle(), "Search results: “Blue”");
         storePage.clickAddToCard();
 
