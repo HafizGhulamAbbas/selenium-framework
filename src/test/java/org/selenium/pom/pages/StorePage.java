@@ -43,8 +43,8 @@ public class StorePage extends BasePage {
         enterProductInSearchField(name).clickSearchButton();
         return this;
     }
-
-    public void clickViewCart() {
+    public CartPage clickViewCart() {
         driver.findElement(viewCartLink).click();
+        return new CartPage(driver);
     }
 }

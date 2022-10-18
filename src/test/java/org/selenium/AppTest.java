@@ -2,6 +2,7 @@ package org.selenium;
 
 import org.openqa.selenium.By;
 import org.selenium.pom.base.BaseTest;
+import org.selenium.pom.pages.CartPage;
 import org.selenium.pom.pages.HomePage;
 import org.selenium.pom.pages.StorePage;
 import org.testng.Assert;
@@ -27,6 +28,16 @@ public class AppTest extends BaseTest {
         Assert.assertEquals(storePage.getTitle(), "Search results: “Blue”");
         storePage.clickAddToCardButton("Blue Shoes");
 
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        CartPage cartPage = storePage.clickViewCart();
+        Assert.assertEquals(cartPage.getProductName(), "Blue Shoes");
+        CheckoutPage checkoutPage = cartPage.clickCheckOut();
+
+
 //        try {
 //            Thread.sleep(2000);
 //        } catch (InterruptedException e) {
@@ -45,17 +56,17 @@ public class AppTest extends BaseTest {
 //        );
 //        driver.findElement(By.cssSelector("a[aria-label='Add “Blue Shoes” to your cart']")).click();
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        driver.findElement(By.cssSelector("a[title='View cart']")).click();
-        Assert.assertEquals(
-                driver.findElement(By.cssSelector("td[class='product-name'] a")).getText(),
-                "Blue Shoes"
-        );
-        driver.findElement(By.cssSelector(".checkout-button")).click();
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//        driver.findElement(By.cssSelector("a[title='View cart']")).click();
+//        Assert.assertEquals(
+//                driver.findElement(By.cssSelector("td[class='product-name'] a")).getText(),
+//                "Blue Shoes"
+//        );
+//        driver.findElement(By.cssSelector(".checkout-button")).click();
         driver.findElement(By.id("billing_first_name")).sendKeys("John");
         driver.findElement(By.id("billing_last_name")).sendKeys("Adam");
         driver.findElement(By.id("billing_address_1")).sendKeys("San Francisco");
