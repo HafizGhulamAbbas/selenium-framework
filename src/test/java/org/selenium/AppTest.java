@@ -3,6 +3,7 @@ package org.selenium;
 import org.openqa.selenium.By;
 import org.selenium.pom.base.BaseTest;
 import org.selenium.pom.pages.CartPage;
+import org.selenium.pom.pages.CheckoutPage;
 import org.selenium.pom.pages.HomePage;
 import org.selenium.pom.pages.StorePage;
 import org.testng.Assert;
@@ -36,6 +37,23 @@ public class AppTest extends BaseTest {
         CartPage cartPage = storePage.clickViewCart();
         Assert.assertEquals(cartPage.getProductName(), "Blue Shoes");
         CheckoutPage checkoutPage = cartPage.clickCheckOut();
+        checkoutPage
+                .enterFirstName("John")
+                .enterLastName("Adam")
+                .enterAddressLineOne("San Francisco")
+                .enterCity("New York")
+                .enterPostCode("94148")
+                .enterEmail("askomdch@gmail.com")
+                .placeOrder();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        Assert.assertEquals(
+                checkoutPage.getNotice(),
+                "Thank you. Your order has been received."
+        );
 
 
 //        try {
@@ -67,22 +85,22 @@ public class AppTest extends BaseTest {
 //                "Blue Shoes"
 //        );
 //        driver.findElement(By.cssSelector(".checkout-button")).click();
-        driver.findElement(By.id("billing_first_name")).sendKeys("John");
-        driver.findElement(By.id("billing_last_name")).sendKeys("Adam");
-        driver.findElement(By.id("billing_address_1")).sendKeys("San Francisco");
-        driver.findElement(By.id("billing_city")).sendKeys("New York");
-        driver.findElement(By.id("billing_postcode")).sendKeys("94148");
-        driver.findElement(By.id("billing_email")).sendKeys("askomdch@gmail.com");
-        driver.findElement(By.id("place_order")).click();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        Assert.assertEquals(
-                driver.findElement(By.cssSelector(".woocommerce-notice")).getText(),
-                "Thank you. Your order has been received."
-        );
+//        driver.findElement(By.id("billing_first_name")).sendKeys("John");
+//        driver.findElement(By.id("billing_last_name")).sendKeys("Adam");
+//        driver.findElement(By.id("billing_address_1")).sendKeys("San Francisco");
+//        driver.findElement(By.id("billing_city")).sendKeys("New York");
+//        driver.findElement(By.id("billing_postcode")).sendKeys("94148");
+//        driver.findElement(By.id("billing_email")).sendKeys("askomdch@gmail.com");
+//        driver.findElement(By.id("place_order")).click();
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//        Assert.assertEquals(
+//                driver.findElement(By.cssSelector(".woocommerce-notice")).getText(),
+//                "Thank you. Your order has been received."
+//        );
     }
 
     @Test
