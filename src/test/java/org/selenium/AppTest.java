@@ -25,7 +25,7 @@ public class AppTest extends BaseTest {
         storePage.searchProduct("Blue");
 
         Assert.assertEquals(storePage.getTitle(), "Search results: “Blue”");
-        storePage.clickAddToCard();
+        storePage.clickAddToCardButton("Blue Shoes");
 
 //        try {
 //            Thread.sleep(2000);
