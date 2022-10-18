@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 public class AppTest extends BaseTest {
     @Test
-    public void guestCheckoutUsingDirectBankTransfer(){
+    public void guestCheckoutUsingDirectBankTransfer() throws InterruptedException {
         driver.get("https://askomdch.com/");
 
         HomePage homePage = new HomePage(driver);
@@ -28,12 +28,7 @@ public class AppTest extends BaseTest {
 
         Assert.assertEquals(storePage.getTitle(), "Search results: “Blue”");
         storePage.clickAddToCardButton("Blue Shoes");
-
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        Thread.sleep(5000);
         CartPage cartPage = storePage.clickViewCart();
         Assert.assertEquals(cartPage.getProductName(), "Blue Shoes");
         CheckoutPage checkoutPage = cartPage.checkout();
@@ -50,11 +45,7 @@ public class AppTest extends BaseTest {
                 .enterPostCode("94148")
                 .enterEmail("askomdch@gmail.com")
                 .placeOrder();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        Thread.sleep(5000);
         Assert.assertEquals(
                 checkoutPage.getNotice(),
                 "Thank you. Your order has been received."
@@ -62,62 +53,46 @@ public class AppTest extends BaseTest {
     }
 
     @Test
-    public void loginAndCheckoutUsingDirectBankTransfer(){
+    public void loginAndCheckoutUsingDirectBankTransfer() throws InterruptedException {
         driver.get("https://askomdch.com/");
-        driver.findElement(By.cssSelector("#menu-item-1227 > a")).click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        driver.findElement(By.id("woocommerce-product-search-field-0")).sendKeys("Blue");
-        driver.findElement((By.cssSelector("button[value='Search']"))).click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        HomePage homePage = new HomePage(driver);
+        StorePage storePage = homePage.navigateToStoreUsingMenu();
+        storePage.searchProduct("Blue");
+        Assert.assertEquals(storePage.getTitle(), "Search results: “Blue”");
+
+        storePage.clickAddToCardButton("Blue Shoes");
+        Thread.sleep(5000);
+        CartPage cartPage = storePage.clickViewCart();
+        Assert.assertEquals(cartPage.getProductName(), "Blue Shoes");
+        CheckoutPage checkoutPage = cartPage.checkout();
+        checkoutPage.clickHereToLoginLink();
+        Thread.sleep(3000);
+        checkoutPage
+                .login("demouser2", "demopwd")
+                .enterFirstName("John")
+                .enterLastName("Adam")
+                .enterAddressLineOne("San Francisco")
+                .enterCity("New York")
+                .enterPostCode("94148")
+                .enterEmail("askomdch@gmail.com")
+                .placeOrder();
+        Thread.sleep(5000);
         Assert.assertEquals(
-                driver.findElement(By.cssSelector(".woocommerce-products-header__title.page-title")).getText(),
-                "Search results: “Blue”"
-        );
-        driver.findElement(By.cssSelector("a[aria-label='Add “Blue Shoes” to your cart']")).click();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        driver.findElement(By.cssSelector("a[title='View cart']")).click();
-        Assert.assertEquals(
-                driver.findElement(By.cssSelector("td[class='product-name'] a")).getText(),
-                "Blue Shoes"
-        );
-        driver.findElement(By.cssSelector(".checkout-button")).click();
-        driver.findElement(By.className("showlogin")).click();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        driver.findElement(By.id("username")).sendKeys("demouser2");
-        driver.findElement(By.id("password")).sendKeys("demopwd");
-        driver.findElement(By.className("login")).click();
-        driver.findElement(By.id("billing_first_name")).sendKeys("John");
-        driver.findElement(By.id("billing_last_name")).sendKeys("Adam");
-        driver.findElement(By.id("billing_address_1")).sendKeys("San Francisco");
-        driver.findElement(By.id("billing_city")).sendKeys("New York");
-        driver.findElement(By.id("billing_postcode")).sendKeys("94148");
-        driver.findElement(By.id("billing_email")).clear();
-        driver.findElement(By.id("billing_email")).sendKeys("askomdch@gmail.com");
-        driver.findElement(By.id("place_order")).click();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        Assert.assertEquals(
-                driver.findElement(By.cssSelector(".woocommerce-notice")).getText(),
+                checkoutPage.getNotice(),
                 "Thank you. Your order has been received."
         );
+
+
+//        driver.findElement(By.id("username")).sendKeys("demouser2");
+//        driver.findElement(By.id("password")).sendKeys("demopwd");
+//        driver.findElement(By.className("login")).click();
+//        driver.findElement(By.id("billing_first_name")).sendKeys("John");
+//        driver.findElement(By.id("billing_last_name")).sendKeys("Adam");
+//        driver.findElement(By.id("billing_address_1")).sendKeys("San Francisco");
+//        driver.findElement(By.id("billing_city")).sendKeys("New York");
+//        driver.findElement(By.id("billing_postcode")).sendKeys("94148");
+//        driver.findElement(By.id("billing_email")).clear();
+//        driver.findElement(By.id("billing_email")).sendKeys("askomdch@gmail.com");
+//        driver.findElement(By.id("place_order")).click();
     }
 }
