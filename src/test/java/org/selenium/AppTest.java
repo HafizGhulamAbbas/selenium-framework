@@ -2,6 +2,8 @@ package org.selenium;
 
 import org.openqa.selenium.By;
 import org.selenium.pom.base.BaseTest;
+import org.selenium.pom.pages.HomePage;
+import org.selenium.pom.pages.StorePage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -9,24 +11,33 @@ public class AppTest extends BaseTest {
     @Test
     public void guestCheckoutUsingDirectBankTransfer(){
         driver.get("https://askomdch.com/");
-        driver.findElement(By.cssSelector("#menu-item-1227 > a")).click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        driver.findElement(By.id("woocommerce-product-search-field-0")).sendKeys("Blue");
-        driver.findElement((By.cssSelector("button[value='Search']"))).click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        Assert.assertEquals(
-                driver.findElement(By.cssSelector(".woocommerce-products-header__title.page-title")).getText(),
-                "Search results: “Blue”"
-        );
-        driver.findElement(By.cssSelector("a[aria-label='Add “Blue Shoes” to your cart']")).click();
+
+        HomePage homePage = new HomePage(driver);
+        // Benefit of Fluent Interface
+        StorePage storePage = homePage.clickStoreMenuLink(); // homePage.clickStoreMenuLink() will return a StorePage object. So, no need to instantiate StorePage object.
+        storePage.enterProductInSearchField("Blue");
+        storePage.clickSearchButton();
+        Assert.assertEquals(storePage.getTitle(), "Search results: “Blue”");
+        storePage.clickAddToCard();
+
+//        try {
+//            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//        driver.findElement(By.id("woocommerce-product-search-field-0")).sendKeys("Blue");
+//        driver.findElement((By.cssSelector("button[value='Search']"))).click();
+//        try {
+//            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//        Assert.assertEquals(
+//                driver.findElement(By.cssSelector(".woocommerce-products-header__title.page-title")).getText(),
+//                "Search results: “Blue”"
+//        );
+//        driver.findElement(By.cssSelector("a[aria-label='Add “Blue Shoes” to your cart']")).click();
+
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
