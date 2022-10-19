@@ -97,3 +97,20 @@ https://rest-assured.io/
 2. emptyString()
 
 [Find all matchers at official documentation](http://hamcrest.org/JavaHamcrest/javadoc/1.3/org/hamcrest/Matchers.html)
+
+### Some Questions
+**`Q:`** Given below JSON Object, and assertion, will this work?
+
+body("address", empty()) {
+    "address": ""
+}
+
+**`Answer`**: Yes / **_`No`_** 
+
+**`Explanation`**: empty() can be used only on collection. Here the value is a string, so empty() cannot be used. You can instead use emptyString() or isEmptyString()
+
+**`Q:`** allOff() and anyOff() can be used on Collections
+
+**`Answer`**: True / **_`False`_**
+
+**`Explanation`**: allOff() and anyOff() can only be used on Strings
