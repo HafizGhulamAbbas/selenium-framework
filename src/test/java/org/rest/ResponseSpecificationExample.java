@@ -31,10 +31,16 @@ public class ResponseSpecificationExample {
 
         RestAssured.requestSpecification = requestSpecBuilder.build();
 
-        responseSpecification = RestAssured.expect().
+        /*responseSpecification = RestAssured.expect().
                 statusCode(200).
                 contentType(ContentType.JSON).
-                log().all();
+                log().all();*/
+
+        ResponseSpecBuilder responseSpecBuilder = new ResponseSpecBuilder().
+                expectStatusCode(200).
+                expectContentType(ContentType.JSON).
+                log(LogDetail.ALL);
+        responseSpecification = responseSpecBuilder.build();
     }
 
     @Test
