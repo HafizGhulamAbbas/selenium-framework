@@ -53,3 +53,47 @@ https://rest-assured.io/
   - io.restassured.RestAssured.*
   - io.restassured.matcher.RestAssuredMatchers.*
   - org.hamcrest.Matchers.*
+
+## Hamcrest importance and popularity
+- Hamcrest is a well known assertion library used for unit testing along with JUnit. 
+- Hamcrest can be used along with Rest Assured for assertions. 
+- Uses matcher classes for making assertions
+
+### Advantages
+1. Human readable and in plain english 
+2. Code is neat and intuitive 
+3. Provides thin methods like "is" and "not", also called as decorators, for more readibility
+
+### Hamcrest Vs TestNG
+- Readibility 
+- Descriptive error messages 
+- Type Safety _`(Get error at compile type)`_
+
+### Collection matchers (List, Array, Map, etc.)
+1. hasItem() -> check single element in a collection 
+2. not(hasItem()) -> check single element is NOT in a collection 
+3. hasItems() -> Check all elements are in a collection _`(Don't do strict checking. For example, if you check two elements are present in a collection of five. It will pass if two required elements are found)`_
+4. contains() -> Check all elements are in a collection and in a strict order _`(It does strict checking)`_
+5. containsInAnyOrder() -> Check all elements are in a collection and in any order 
+6. empty() -> Check if collection is empty 
+7. not(emptyArray()) -> Check if the Array is not empty 
+###### For maps
+8. hasSize() -> Check size of a collection 
+9. everyItem(startsWith()) -> Check if every item in a collection starts with specified string 
+10. hasKey() -> Map -> Check if Map has the specified key [value is not checked]
+11. hasValue() -> Map -> Check if Map has at least one key matching specified value 
+12. hasEntry() -> Maps -> Check if Map has the specified key value pair 
+13. equalTo(Collections.EMPTY_MAP) -> Maps [Check if empty]
+14. allOf() -> Matches if all matchers matches 
+15. anyOf() -> Matches if any of the matchers matches
+
+###### For Numbers
+1. greaterThanOrEqualTo()
+2. lessThan()
+3. lessThanOrEqualTo()
+
+###### For String
+1. containsString()
+2. emptyString()
+
+[Find all matchers at official documentation](http://hamcrest.org/JavaHamcrest/javadoc/1.3/org/hamcrest/Matchers.html)

@@ -5,6 +5,8 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Collections;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -154,5 +156,31 @@ public class AutomateGet {
 
         // assertThat(name, equalTo("rest-assured-framework")); // Hamscrest
         Assert.assertEquals(name, "rest-assured-framework"); // TestNG
+    }
+
+    // Hamcrest assertion practice
+    @Test
+    public void validate_response_body_hamcrest_learnings() {
+        given().
+                baseUri("https://api.postman.com").
+                header("x-api-key", "PMAK-634eeca9391e9e36398b8cbb-a73e5dfd984bf78ddadb401fe33e0d6773").
+        when().
+                get("/workspaces").
+        then().
+                // log().all().
+                assertThat().
+                statusCode(200).
+                body("workspaces.name", containsInAnyOrder("Team Workspace", "My Workspace", "rest-assured-framework"),
+                        "workspaces.name", is(not(emptyArray())),
+                        "workspaces.name", hasSize(3),
+                        // "workspaces.name", everyItem(startsWith("My"))
+                        "workspaces[2]", hasKey("id"),
+                        "workspaces[2]", hasValue("rest-assured-framework"),
+                        "workspaces[0]", hasEntry("id", "80c02df0-4832-4484-8d3d-6a64d598010a"),
+                        "workspaces[0]", not(equalTo(Collections.EMPTY_MAP)),
+                        // "workspaces[0]", not(equalTo(Collections.EMPTY_LIST)),
+                        // "workspaces[0]", not(equalTo(Collections.emptySet())),
+                        "workspaces[0].name", allOf(startsWith("My"), containsString("Workspace"))
+                );
     }
 }
