@@ -114,3 +114,7 @@ body("address", empty()) {
 **`Answer`**: True / **_`False`_**
 
 **`Explanation`**: allOff() and anyOff() can only be used on Strings
+
+
+### Headers
+https://www.iana.org/assignments/message-headers/message-headers.xhtml
