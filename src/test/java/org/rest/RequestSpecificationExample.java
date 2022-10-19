@@ -16,8 +16,6 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
 public class RequestSpecificationExample {
-    RequestSpecification requestSpecification;
-
     @BeforeClass
     public void beforeClass() {
         // the difference between given() and with() is syntactical.
@@ -29,23 +27,17 @@ public class RequestSpecificationExample {
                 setBaseUri("https://api.postman.com").
                 addHeader("x-api-key", "PMAK-634eeca9391e9e36398b8cbb-a73e5dfd984bf78ddadb401fe33e0d6773").
                 log(LogDetail.ALL);
-        requestSpecification = requestSpecBuilder.build();
+        RestAssured.requestSpecification = requestSpecBuilder.build();
     }
 
     @Test
     public void validate_status_code(){
-        // Response response = given().spec(requestSpecification).get("/workspaces").then().log().all().extract().response();
-        Response response = given(requestSpecification).
-                header("dummyHeader", "dummyValue").
-                get("/workspaces").then().log().all().extract().response();
+        Response response = get("/workspaces").then().log().all().extract().response();
         assertThat(response.statusCode(), is(equalTo(200)));
     }
     @Test
     public void validate_response_body(){
-        // Response response = given().spec(requestSpecification).get("/workspaces").then().log().all().extract().response();
-        Response response = given(requestSpecification).
-                header("dummyHeader", "dummyValue").
-                get("/workspaces").then().log().all().extract().response();
+        Response response = get("/workspaces").then().log().all().extract().response();
         assertThat(response.statusCode(), is(equalTo(200)));
         assertThat(response.path("workspaces[2].name").toString(), equalTo("rest-assured-framework"));
     }
