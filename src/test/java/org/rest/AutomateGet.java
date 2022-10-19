@@ -2,9 +2,11 @@ package org.rest;
 
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class AutomateGet {
@@ -133,5 +135,24 @@ public class AutomateGet {
                 extract().
                 response().path("workspaces[2].name");
         System.out.println("workspace name: " + name);*/
+    }
+
+    // Hamscrest / TestNG Assertion on the extracted response
+    @Test
+    public void hamcrest_assert_on_extracted_response(){
+        String name = given().
+                baseUri("https://api.postman.com").
+                header("x-api-key", "PMAK-634eeca9391e9e36398b8cbb-a73e5dfd984bf78ddadb401fe33e0d6773").
+                when().
+                get("/workspaces").
+                then().
+                assertThat().
+                statusCode(200).
+                extract().
+                response().path("workspaces[2].name");
+        System.out.println("workspace name = " + name);
+
+        // assertThat(name, equalTo("rest-assured-framework")); // Hamscrest
+        Assert.assertEquals(name, "rest-assured-framework"); // TestNG
     }
 }
