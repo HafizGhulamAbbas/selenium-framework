@@ -41,4 +41,11 @@ public class RequestSpecificationExample {
         assertThat(response.statusCode(), is(equalTo(200)));
         assertThat(response.path("workspaces[2].name").toString(), equalTo("rest-assured-framework"));
     }
+    @Test
+    public void queryTest(){
+        QueryableRequestSpecification queryableRequestSpecification = SpecificationQuerier.
+                query(RestAssured.requestSpecification);
+        System.out.println(queryableRequestSpecification.getBaseUri());
+        System.out.println(queryableRequestSpecification.getHeaders());
+    }
 }
