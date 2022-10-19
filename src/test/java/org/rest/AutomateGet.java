@@ -1,5 +1,6 @@
 package org.rest;
 
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
@@ -51,9 +52,9 @@ public class AutomateGet {
         given().
                 baseUri("https://api.postman.com").
                 header("x-api-key", "PMAK-634eeca9391e9e36398b8cbb-a73e5dfd984bf78ddadb401fe33e0d6773").
-                when().
+        when().
                 get("/workspaces").
-                then().
+        then().
                 log().all().
                 assertThat().
                 statusCode(200).
@@ -76,14 +77,61 @@ public class AutomateGet {
         Response res = given().
                 baseUri("https://api.postman.com").
                 header("x-api-key", "PMAK-634eeca9391e9e36398b8cbb-a73e5dfd984bf78ddadb401fe33e0d6773").
-                when().
+        when().
                 get("/workspaces").
-                then().
+        then().
                 assertThat().
                 statusCode(200).
                 // Below two lines will work and the response is saved in res, and we can manipulate it accordingly. Note, Response is an interface, so no need to create object. res will contain the ref.
                 extract().
                 response();
         System.out.println("response = " + res.asString());
+    }
+
+    // Let's extract a single value from response. We will use Gpath expression. Rest Assured auto-detects whether to use JsonPath or XMLpath based on the content type.
+    // If no content path, Rest Assured will try to look at the 'default parser'.
+    @Test
+    public void extract_single_value_from_response(){
+        Response res = given().
+                baseUri("https://api.postman.com").
+                header("x-api-key", "PMAK-634eeca9391e9e36398b8cbb-a73e5dfd984bf78ddadb401fe33e0d6773").
+            when().
+                get("/workspaces").
+            then().
+                assertThat().
+                statusCode(200).
+                extract().
+                response();
+        System.out.println("workspace name: " + res.path("workspaces[2].name"));
+
+        // Second way
+        /* JsonPath jsonPath = new JsonPath(res.asString());
+        System.out.println("workspace name: " + jsonPath.getString("workspaces[2].name")); */
+
+        // Third way
+        /*String response = given().
+                baseUri("https://api.postman.com").
+                header("x-api-key", "PMAK-634eeca9391e9e36398b8cbb-a73e5dfd984bf78ddadb401fe33e0d6773").
+        when().
+                get("/workspaces").
+        then().
+                assertThat().
+                statusCode(200).
+                extract().
+                response().asString();
+        System.out.println("workspace name: " + JsonPath.from(response).getString("workspaces[2].name"));*/
+
+        // Fourth way
+        /*String name = given().
+                baseUri("https://api.postman.com").
+                header("x-api-key", "PMAK-634eeca9391e9e36398b8cbb-a73e5dfd984bf78ddadb401fe33e0d6773").
+        when().
+                get("/workspaces").
+        then().
+                assertThat().
+                statusCode(200).
+                extract().
+                response().path("workspaces[2].name");
+        System.out.println("workspace name: " + name);*/
     }
 }
