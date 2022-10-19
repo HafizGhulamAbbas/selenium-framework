@@ -25,10 +25,10 @@ public class RequestSpecificationExample {
                 baseUri("https://api.postman.com").
                 header("x-api-key", "PMAK-634eeca9391e9e36398b8cbb-a73e5dfd984bf78ddadb401fe33e0d6773").
                 log().all();*/
-        RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
-        requestSpecBuilder.setBaseUri("https://api.postman.com");
-        requestSpecBuilder.addHeader("x-api-key", "PMAK-634eeca9391e9e36398b8cbb-a73e5dfd984bf78ddadb401fe33e0d6773");
-        requestSpecBuilder.log(LogDetail.ALL);
+        RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder().
+                setBaseUri("https://api.postman.com").
+                addHeader("x-api-key", "PMAK-634eeca9391e9e36398b8cbb-a73e5dfd984bf78ddadb401fe33e0d6773").
+                log(LogDetail.ALL);
         requestSpecification = requestSpecBuilder.build();
     }
 
