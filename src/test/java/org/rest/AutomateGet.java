@@ -1,5 +1,6 @@
 package org.rest;
 
+import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
@@ -66,5 +67,23 @@ public class AutomateGet {
                         "workspaces[2].visibility", is(equalTo("team")),
                         "workspaces.size()", equalTo(3)
                 );
+    }
+
+    // If you want to extract response so that you can assert in other assertion library instead of Hamscrest like TestNG
+    // The entire response object will include headers, cookies, and body etc
+    @Test
+    public void extract_response(){
+        Response res = given().
+                baseUri("https://api.postman.com").
+                header("x-api-key", "PMAK-634eeca9391e9e36398b8cbb-a73e5dfd984bf78ddadb401fe33e0d6773").
+                when().
+                get("/workspaces").
+                then().
+                assertThat().
+                statusCode(200).
+                // Below two lines will work and the response is saved in res, and we can manipulate it accordingly. Note, Response is an interface, so no need to create object. res will contain the ref.
+                extract().
+                response();
+        System.out.println("response = " + res.asString());
     }
 }
