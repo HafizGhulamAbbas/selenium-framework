@@ -1,12 +1,16 @@
 package org.rest;
 
+import io.restassured.config.LogConfig;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
+import static io.restassured.RestAssured.config;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -182,5 +186,60 @@ public class AutomateGet {
                         // "workspaces[0]", not(equalTo(Collections.emptySet())),
                         "workspaces[0].name", allOf(startsWith("My"), containsString("Workspace"))
                 );
+    }
+
+    @Test
+    public void request_response_logging(){
+        given().
+                baseUri("https://api.postman.com").
+                header("x-api-key", "PMAK-634eeca9391e9e36398b8cbb-a73e5dfd984bf78ddadb401fe33e0d6773").
+                log().all().
+                // log().headers().
+                // log().body().
+                // log().cookies().
+        when().
+                get("/workspaces").
+        then().
+                log().all().
+                // log().headers().
+                // log().body().
+                // log().cookies().
+                assertThat().
+                statusCode(200);
+    }
+
+    @Test
+    public void log_only_if_validation_fail(){
+        given().
+                baseUri("https://api.postman.com").
+                header("x-api-key", "PMAK-634eeca9391e9e36398b8cbb-a73e5dfd984bf78ddadb401fe33e0d6773").
+                config(config.logConfig(LogConfig.logConfig().enableLoggingOfRequestAndResponseIfValidationFails())).
+                // OR
+                // log().ifValidationFails().
+        when().
+                get("/workspaces").
+        then().
+                // log().ifValidationFails().
+                assertThat().
+                statusCode(200);
+    }
+
+    @Test
+    public void log_blacklist_header(){
+        Set<String> headers = new HashSet<String>();
+        headers.add("x-api-key");
+        headers.add("Accept");
+        given().
+                baseUri("https://api.postman.com").
+                header("x-api-key", "PMAK-634eeca9391e9e36398b8cbb-a73e5dfd984bf78ddadb401fe33e0d6773").
+                // config(config.logConfig(LogConfig.logConfig().blacklistHeader("x-api-key"))).
+                // Or if you want to blacklist multiple headers
+                config(config.logConfig(LogConfig.logConfig().blacklistHeaders(headers))).
+                log().all().
+        when().
+                get("/workspaces").
+        then().
+                assertThat().
+                statusCode(200);
     }
 }
