@@ -42,8 +42,9 @@ public class AutomatePut {
                 "}";
         given().
                 body(payload).
+                pathParam("workspaceId", workspaceId).
         when().
-                put("/workspaces/" + workspaceId).
+                put("/workspaces/{workspaceId}").
         then().
                 log().all().
                 assertThat().
