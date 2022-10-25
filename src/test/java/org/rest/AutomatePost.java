@@ -86,4 +86,27 @@ public class AutomatePost {
                 body("workspace.name", equalTo("mySecondWorkspace"),
                         "workspace.id", matchesPattern("^[a-z0-9-]{36}$"));
     }
+
+    @Test
+    public void validate_post_request_payload_as_map(){
+        HashMap<String, Object> mainObject = new HashMap<String, Object>();
+
+        HashMap<String, String> nestedObject = new HashMap<String, String>();
+        nestedObject.put("name", "myThirdWorkspace");
+        nestedObject.put("type", "personal");
+        nestedObject.put("description", "Rest Assured created this");
+
+        mainObject.put("workspace", nestedObject);
+
+        given().
+                // NOTE: To convert HashMap to JSON, we need to do serialization. For this purpose, jackson binder is used.
+                body(mainObject).
+        when().
+                post("/workspaces").
+        then().
+                log().all().
+                assertThat().
+                body("workspace.name", equalTo("myThirdWorkspace"),
+                        "workspace.id", matchesPattern("^[a-z0-9-]{36}$"));
+    }
 }
