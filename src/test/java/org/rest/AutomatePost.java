@@ -72,4 +72,18 @@ public class AutomatePost {
         assertThat(response.<String>path("workspace.name"), equalTo("myFirstWorkspace2"));
         assertThat(response.<String>path("workspace.id"), matchesPattern("^[a-z0-9-]{36}$"));
     }
+
+    @Test
+    public void validate_post_request_payload_from_file(){
+        File file = new File("src/main/resources/CreateWorkspacePayload.json");
+        given().
+                body(file).
+        when().
+                post("/workspaces").
+        then().
+                log().all().
+                assertThat().
+                body("workspace.name", equalTo("mySecondWorkspace"),
+                        "workspace.id", matchesPattern("^[a-z0-9-]{36}$"));
+    }
 }
