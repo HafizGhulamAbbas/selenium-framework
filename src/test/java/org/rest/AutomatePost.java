@@ -55,4 +55,21 @@ public class AutomatePost {
                 body("workspace.name", equalTo("my new workspace"),
                         "workspace.id", matchesPattern("^[a-z0-9-]{36}$"));
     }
+
+    @Test
+    public void validate_post_request_non_bdd_style(){
+        String payload = "{\n" +
+                "    \"workspace\": {\n" +
+                "        \"name\": \"myFirstWorkspace2\",\n" +
+                "        \"type\": \"personal\",\n" +
+                "        \"description\": \"Rest Assured created this\"\n" +
+                "    }\n" +
+                "}";
+
+        Response response = with().
+                body(payload).
+                post("/workspaces");
+        assertThat(response.<String>path("workspace.name"), equalTo("myFirstWorkspace2"));
+        assertThat(response.<String>path("workspace.id"), matchesPattern("^[a-z0-9-]{36}$"));
+    }
 }
