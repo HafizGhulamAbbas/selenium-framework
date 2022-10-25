@@ -1,0 +1,58 @@
+package org.rest;
+
+import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.filter.log.LogDetail;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import java.io.File;
+import java.util.HashMap;
+
+import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.with;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.matchesPattern;
+
+public class AutomatePost {
+
+    @BeforeClass
+    public void beforeClass(){
+        RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder().
+                setBaseUri("https://api.postman.com").
+                addHeader("x-api-key", "PMAK-634eeca9391e9e36398b8cbb-a73e5dfd984bf78ddadb401fe33e0d6773").
+                setContentType(ContentType.JSON).
+                log(LogDetail.ALL);
+        RestAssured.requestSpecification = requestSpecBuilder.build();
+
+        ResponseSpecBuilder responseSpecBuilder = new ResponseSpecBuilder().
+                expectStatusCode(200).
+                expectContentType(ContentType.JSON).
+                log(LogDetail.ALL);
+        RestAssured.responseSpecification = responseSpecBuilder.build();
+    }
+
+    @Test
+    public void validate_post_request_bdd_style(){
+        String payload = "{\n" +
+                "    \"workspace\": {\n" +
+                "        \"name\": \"my new workspace\",\n" +
+                "        \"type\": \"personal\",\n" +
+                "        \"description\": \"Rest Assured created this\"\n" +
+                "    }\n" +
+                "}";
+        given().
+                body(payload).
+        when().
+                post("/workspaces").
+        then().
+                log().all().
+                assertThat().
+                body("workspace.name", equalTo("my new workspace"),
+                        "workspace.id", matchesPattern("^[a-z0-9-]{36}$"));
+    }
+}
