@@ -16,8 +16,6 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
 public class ResponseSpecificationExample {
-    ResponseSpecification responseSpecification;
-
     @BeforeClass
     public void beforeClass(){
 /*        requestSpecification = with().
@@ -40,19 +38,18 @@ public class ResponseSpecificationExample {
                 expectStatusCode(200).
                 expectContentType(ContentType.JSON).
                 log(LogDetail.ALL);
-        responseSpecification = responseSpecBuilder.build();
+        RestAssured.responseSpecification = responseSpecBuilder.build();
     }
 
     @Test
     public void validate_status_code() {
-        get("/workspaces").
-        then().spec(responseSpecification);
+        get("/workspaces");
     }
 
     @Test
     public void validate_response_body() {
         Response response = get("/workspaces").
-                then().spec(responseSpecification).
+                then().
                 extract().
                 response();
         assertThat(response.path("workspaces[2].name").toString(), equalTo("rest-assured-framework"));
