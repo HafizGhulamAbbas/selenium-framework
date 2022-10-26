@@ -91,4 +91,22 @@ public class RequestParameters {
                 assertThat().
                 statusCode(200);
     }
+
+    @Test
+    public void form_urlencoded(){
+        given().
+                baseUri("https://postman-echo.com").
+                contentType(ContentType.URLENC).
+                 config(config().encoderConfig(EncoderConfig.encoderConfig()
+                        .appendDefaultContentCharsetToContentTypeIfUndefined(false))).
+                formParam("key1", "value1").
+                formParam("key 2", "value 2").
+                log().all().
+        when().
+                post("/post").
+        then().
+                log().all().
+                assertThat().
+                statusCode(200);
+    }
 }
