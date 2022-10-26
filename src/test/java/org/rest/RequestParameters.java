@@ -46,4 +46,18 @@ public class RequestParameters {
                 assertThat().
                 statusCode(200);
     }
+
+    @Test
+    public void multi_value_query_parameter(){
+        given().
+                baseUri("https://postman-echo.com").
+                queryParam("foo1", "bar1;bar2;bar3").
+                log().all().
+        when().
+                get("/get").
+        then().
+                log().all().
+                assertThat().
+                statusCode(200);
+    }
 }
