@@ -61,4 +61,28 @@ public class JacksonAPI_JSONObject {
                 body("workspace.name", equalTo("myWorkspace1"),
                         "workspace.id", matchesPattern("^[a-z0-9-]{36}$"));
     }
+
+    @Test
+    public void serialize_json_using_jackson() throws JsonProcessingException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode nestedObjectNode = objectMapper.createObjectNode();
+        nestedObjectNode.put("name", "myWorkspace3");
+        nestedObjectNode.put("type", "personal");
+        nestedObjectNode.put("description", "Rest Assured created this");
+
+        ObjectNode mainObjectNode = objectMapper.createObjectNode();
+        mainObjectNode.set("workspace", nestedObjectNode);
+
+        String mainObjectStr = objectMapper.writeValueAsString(mainObjectNode);
+
+        given().
+                body(mainObjectNode).
+                when().
+                post("/workspaces").
+                then().spec(responseSpecification).
+                assertThat().
+                body("workspace.name", equalTo("myWorkspace3"),
+                        "workspace.id", matchesPattern("^[a-z0-9-]{36}$"));
+    }
 }
