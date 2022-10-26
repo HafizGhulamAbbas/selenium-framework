@@ -60,4 +60,19 @@ public class RequestParameters {
                 assertThat().
                 statusCode(200);
     }
+
+    @Test
+    public void path_parameter(){
+        given().
+                baseUri("https://reqres.in").
+                pathParam("userId", "2").
+                // pathParams(HashObject)
+                log().all().
+        when().
+                get("/api/users/{userId}").
+        then().
+                log().all().
+                assertThat().
+                statusCode(200);
+    }
 }
