@@ -130,3 +130,43 @@ https://drive.google.com/file/d/1J5g54dOKgCSqMBoYPSzGI6QAo9sMIp-o/view?usp=shari
 ### Object Mapping
 REST Assured supports mapping Java objects to and from JSON and XML. For JSON you need to have either Jackson, Jackson2, Gson or Johnzon in the classpath and for XML you need Jakarta EE or JAXB.
 https://github.com/rest-assured/rest-assured/wiki/Usage#object-mapping
+
+
+JSON Object:
+========================================================
+ObjectMapper
+CreateObjectNode() —> returns instance of ObjectNode class
+
+ObjectNode
+put(String, T)
+
+ObjectNode <-> HashMap
+
+put(String, T) <-> put(String, T)
+
+Get JSON Object as String —> writeValueAsString() from ObjectMapper
+Get JSON Object —> writerWithDefaultPrettyPrinter() from ObjectMapper
+
+RestAssured
+—> Pass String
+—> Pass ObjectNode
+
+
+JSON Array:
+========================================================
+ObjectMapper
+CreateArrayNode() —> returns instance of ArrayNode class
+
+ArrayNode
+put(String, T)
+
+ArrayNode <-> ArrayList
+
+add(T) <-> add(T)
+
+Get JSON Array as String —> writeValueAsString() from ObjectMapper
+Get JSON Array —> writerWithDefaultPrettyPrinter() from ObjectMapper
+
+RestAssured
+—> Pass String
+—> Pass ArrayNode

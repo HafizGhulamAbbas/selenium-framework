@@ -67,4 +67,32 @@ public class JacksonAPI_JSONArray {
                 assertThat().
                 body("message", equalTo("Success"));
     }
+
+    @Test
+    public void serialize_json_array_using_jackson() throws JsonProcessingException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ArrayNode arrayNodeList = objectMapper.createArrayNode();
+
+        ObjectNode obj5001Node = objectMapper.createObjectNode();
+        obj5001Node.put("id", "5001");
+        obj5001Node.put("type", "None");
+
+        ObjectNode obj5002Node = objectMapper.createObjectNode();
+        obj5002Node.put("id", "5002");
+        obj5002Node.put("type", "Glazed");
+
+        arrayNodeList.add(obj5001Node);
+        arrayNodeList.add(obj5002Node);
+
+        String jsonListStr = objectMapper.writeValueAsString(arrayNodeList);
+
+        given().
+                body(jsonListStr).
+                when().
+                post("/post").
+                then().spec(customResponseSpecification).
+                assertThat().
+                body("message", equalTo("Success"));
+    }
 }
