@@ -35,14 +35,15 @@ public class Filters {
 
     @Test
     public void loggingFilter() throws FileNotFoundException {
-        given(requestSpecification).
+        PrintStream fileOutputStream = new PrintStream(new File("restAssured.log"));
+        given().
                 baseUri("https://postman-echo.com").
-                filter(new RequestLoggingFilter(LogDetail.BODY)).
-                filter((new ResponseLoggingFilter(LogDetail.STATUS))).
+                filter(new RequestLoggingFilter(LogDetail.BODY, fileOutputStream)).
+                filter((new ResponseLoggingFilter(LogDetail.STATUS, fileOutputStream))).
                 // log().all().
         when().
                 get("/get").
-        then().spec(responseSpecification).
+        then().
                 // log().all().
                 assertThat().
                 statusCode(200);
