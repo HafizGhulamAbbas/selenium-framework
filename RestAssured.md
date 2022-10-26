@@ -118,3 +118,15 @@ body("address", empty()) {
 
 ### Headers
 https://www.iana.org/assignments/message-headers/message-headers.xhtml
+
+
+### Serialization and de-serialization
+         {Serialiaztion}      -->       [Data Storage]      -->      {De- Serialiaztion}
+{(Java Object) to (Byte Stream)} --> [File / DB / Memory] --> {(Byte Stream) to (Java Object)}
+
+### Serialization and de-serialization in RestAssure
+https://drive.google.com/file/d/1J5g54dOKgCSqMBoYPSzGI6QAo9sMIp-o/view?usp=sharing
+
+### Object Mapping
+REST Assured supports mapping Java objects to and from JSON and XML. For JSON you need to have either Jackson, Jackson2, Gson or Johnzon in the classpath and for XML you need Jakarta EE or JAXB.
+https://github.com/rest-assured/rest-assured/wiki/Usage#object-mapping
