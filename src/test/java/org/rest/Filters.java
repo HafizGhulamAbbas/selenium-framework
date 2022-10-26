@@ -37,8 +37,8 @@ public class Filters {
     public void loggingFilter() throws FileNotFoundException {
         given(requestSpecification).
                 baseUri("https://postman-echo.com").
-                filter(new RequestLoggingFilter()).
-                filter((new ResponseLoggingFilter())).
+                filter(new RequestLoggingFilter(LogDetail.BODY)).
+                filter((new ResponseLoggingFilter(LogDetail.STATUS))).
                 // log().all().
         when().
                 get("/get").
