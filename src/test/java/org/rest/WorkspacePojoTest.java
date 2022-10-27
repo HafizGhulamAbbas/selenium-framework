@@ -1,7 +1,7 @@
 package org.rest;
 
-import com.rest.pojo.workspace.Workspace;
-import com.rest.pojo.workspace.WorkspaceRoot;
+import org.rest.pojo.workspace.Workspace;
+import org.rest.pojo.workspace.WorkspaceRoot;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -26,7 +26,7 @@ public class WorkspacePojoTest {
     public void beforeClass(){
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder().
                 setBaseUri("https://api.postman.com").
-                addHeader("X-Api-Key", "PMAK-5ff2d720d2a39a004250e5da-c658c4a8a1cee3516762cb1a51cba6c5e2").
+                addHeader("x-api-key", "PMAK-634eeca9391e9e36398b8cbb-a73e5dfd984bf78ddadb401fe33e0d6773").
                 setContentType(ContentType.JSON).
                 log(LogDetail.ALL);
         RestAssured.requestSpecification = requestSpecBuilder.build();
@@ -41,8 +41,8 @@ public class WorkspacePojoTest {
     @Test (dataProvider = "workspace")
     public void workspace_serialize_deserialize(String name, String type, String description){
         Workspace workspace = new Workspace(name, type, description);
-        HashMap<String, String> myHashMap = new HashMap<String, String>();
-        workspace.setMyHashMap(myHashMap);
+//        HashMap<String, String> myHashMap = new HashMap<String, String>();
+//        workspace.setMyHashMap(myHashMap);
         WorkspaceRoot workspaceRoot = new WorkspaceRoot(workspace);
 
         WorkspaceRoot deserializedWorkspaceRoot = given().
@@ -62,7 +62,8 @@ public class WorkspacePojoTest {
     @DataProvider(name = "workspace")
     public Object[][] getWorkspace() {
         return new Object[][]{
-                {"myWorkspace5", "personal", "description"}
+                {"myWorkspace1", "personal", "description"},
+                {"myWorkspace2", "team", "description"}
         };
     }
 }
