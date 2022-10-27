@@ -5,12 +5,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.HashMap;
-@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+
 public class Workspace {
 
     // For String, default value is null and for integer, it's 0. To prevent, having defaults in the response.
-
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
     private int i;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String id;
     private String name;
     private String type;
