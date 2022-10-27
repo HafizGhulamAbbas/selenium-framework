@@ -49,22 +49,22 @@ public class ComplexPojoTest {
 
         Body body = new Body("raw", "{\"data\": \"123\"}");
 
-        Request request = new Request("https://postman-echo.com/post", "POST",
+        RequestRequest request = new RequestRequest("https://postman-echo.com/post", "POST",
                 "This is a sample POST Request", headerList, body);
 
-        RequestRoot requestRoot = new RequestRoot("Sample POST Request", request);
-        List<RequestRoot> requestRootList = new ArrayList<RequestRoot>();
+        RequestRootRequest requestRoot = new RequestRootRequest("Sample POST Request", request);
+        List<RequestRootRequest> requestRootList = new ArrayList<RequestRootRequest>();
         requestRootList.add(requestRoot);
 
-        Folder folder = new Folder("This is a folder", requestRootList);
-        List<Folder> folderList = new ArrayList<Folder>();
+        FolderRequest folder = new FolderRequest("This is a folder", requestRootList);
+        List<FolderRequest> folderList = new ArrayList<FolderRequest>();
         folderList.add(folder);
 
         Info info = new Info("Sample Collection1", "This is just a sample collection.",
                 "https://schema.getpostman.com/json/collection/v2.1.0/collection.json");
 
-        Collection collection = new Collection(info, folderList);
-        CollectionRoot collectionRoot = new CollectionRoot(collection);
+        CollectionRequest collection = new CollectionRequest(info, folderList);
+        CollectionRootRequest collectionRoot = new CollectionRootRequest(collection);
 
         String collectionUid = given().
                 body(collectionRoot).
@@ -74,14 +74,14 @@ public class ComplexPojoTest {
                 extract().
                 response().path("collection.uid");
 
-        CollectionRoot deserializedCollectionRoot = given().
+        CollectionRootResponse deserializedCollectionRoot = given().
                 pathParam("collectionUid", collectionUid).
         when().
                 get("/collections/{collectionUid}").
         then().spec(responseSpecification).
                 extract().
                 response().
-                as(CollectionRoot.class);
+                as(CollectionRootResponse.class);
 
         ObjectMapper objectMapper = new ObjectMapper();
         String collectionRootStr = objectMapper.writeValueAsString(collectionRoot);

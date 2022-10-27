@@ -175,6 +175,14 @@ RestAssured
 ### Complex POJO
 https://sdsglobal.udemy.com/course/rest-assured-api-automation/learn/lecture/25233256#overview
 
+
+### Request Payload
+https://drive.google.com/file/d/1DQUA9FMcwa3RzG_GN8D3DzAdAC-cMyDB/view?usp=sharing
+
+### Request Response Payload
+https://drive.google.com/file/d/106tyXpysTSq6D32qWYwgD1AGfzkYHTh_/view?usp=sharing
+
+
 ##### Sample Collection for Which POJO class are created:
 ```{
     "collection": {
