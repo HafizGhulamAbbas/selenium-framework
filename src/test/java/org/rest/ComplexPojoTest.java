@@ -20,6 +20,8 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 
 
 public class ComplexPojoTest {
@@ -96,5 +98,26 @@ public class ComplexPojoTest {
                         })
                 )
         );
+
+        List<String> UrlRequestList = new ArrayList<String>();
+        List<String> UrlResponseList = new ArrayList<String>();
+
+        for(RequestRootRequest requestRootRequest:requestRootList){
+            System.out.println("url from request payload: " + requestRootRequest.getRequest().getUrl());
+            UrlRequestList.add(requestRootRequest.getRequest().getUrl());
+            //       UrlRequestList.add("http://dummy.com");
+        }
+
+        List<FolderResponse> folderResponseList = deserializedCollectionRoot.getCollection().getItem();
+        for(FolderResponse folderResponse: folderResponseList){
+            List<RequestRootResponse> requestRootResponseList = folderResponse.getItem();
+            for(RequestRootResponse requestRootResponse: requestRootResponseList){
+                URL url = requestRootResponse.getRequest().getUrl();
+                System.out.println("url from response: " + url.getRaw());
+                UrlResponseList.add(url.getRaw());
+            }
+        }
+
+        assertThat(UrlResponseList, containsInAnyOrder(UrlRequestList.toArray()));
     }
 }
