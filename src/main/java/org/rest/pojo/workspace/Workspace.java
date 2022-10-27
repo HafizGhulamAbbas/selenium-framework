@@ -5,8 +5,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.HashMap;
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class Workspace {
+
+    // For String, default value is null and for integer, it's 0. To prevent, having defaults in the response.
+
+    private int i;
     private String id;
     private String name;
     private String type;
@@ -20,6 +24,8 @@ public class Workspace {
         this.description = description;
     }
 
+    public int getI() { return i; }
+    public void setI(int i) { this.i = i; }
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
     public String getName() {
