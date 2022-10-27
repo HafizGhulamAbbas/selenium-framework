@@ -1,5 +1,8 @@
 package org.rest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONException;
 import org.rest.pojo.collection.*;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -7,6 +10,11 @@ import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.specification.ResponseSpecification;
+import org.skyscreamer.jsonassert.Customization;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
+import org.skyscreamer.jsonassert.ValueMatcher;
+import org.skyscreamer.jsonassert.comparator.CustomComparator;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.util.ArrayList;
@@ -34,7 +42,7 @@ public class ComplexPojoTest {
     }
 
     @Test
-    public void complex_pojo_create_collection() {
+    public void complex_pojo_create_collection() throws JsonProcessingException, JSONException {
         Header header = new Header("Content-Type", "application/json");
         List<Header> headerList = new ArrayList<Header>();
         headerList.add(header);
@@ -74,5 +82,19 @@ public class ComplexPojoTest {
                 extract().
                 response().
                 as(CollectionRoot.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String collectionRootStr = objectMapper.writeValueAsString(collectionRoot);
+        String deserializedCollectionRootStr = objectMapper.writeValueAsString(deserializedCollectionRoot);
+
+        JSONAssert.assertEquals(collectionRootStr, deserializedCollectionRootStr,
+                new CustomComparator(JSONCompareMode.STRICT,
+                        new Customization("collection.item[*].item[*].request.url", new ValueMatcher<Object>() {
+                            public boolean equal(Object o1, Object o2) {
+                                return true;
+                            }
+                        })
+                )
+        );
     }
 }
