@@ -49,7 +49,7 @@ public class ComplexPojoTest {
         requestRootList.add(requestRoot);
 
         Folder folder = new Folder("This is a folder", requestRootList);
-        List<Object> folderList = new ArrayList<Object>();
+        List<Folder> folderList = new ArrayList<Folder>();
         folderList.add(folder);
 
         Info info = new Info("Sample Collection1", "This is just a sample collection.",
@@ -58,10 +58,21 @@ public class ComplexPojoTest {
         Collection collection = new Collection(info, folderList);
         CollectionRoot collectionRoot = new CollectionRoot(collection);
 
-        given().
+        String collectionUid = given().
                 body(collectionRoot).
         when().
                 post("/collections").
-        then().spec(responseSpecification);
+        then().spec(responseSpecification).
+                extract().
+                response().path("collection.uid");
+
+        CollectionRoot deserializedCollectionRoot = given().
+                pathParam("collectionUid", collectionUid).
+        when().
+                get("/collections/{collectionUid}").
+        then().spec(responseSpecification).
+                extract().
+                response().
+                as(CollectionRoot.class);
     }
 }

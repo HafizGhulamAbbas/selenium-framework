@@ -1,15 +1,18 @@
 package org.rest.pojo.collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Request {
-    private String url;
+    private Object url;
     private String method;
     private String description;
     List<Header> headerList;
     Body body;
     public Request() { }
-    public Request(String url, String method, String description, List<Header> headerList, Body body) {
+    public Request(Object url, String method, String description, List<Header> headerList, Body body) {
         this.url = url;
         this.method = method;
         this.description = description;
@@ -17,11 +20,11 @@ public class Request {
         this.body = body;
     }
 
-    public String getUrl() {
+    public Object getUrl() {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(Object url) {
         this.url = url;
     }
 

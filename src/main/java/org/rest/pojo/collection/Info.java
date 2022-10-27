@@ -1,5 +1,8 @@
 package org.rest.pojo.collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Info {
     private String name;
     private String description;

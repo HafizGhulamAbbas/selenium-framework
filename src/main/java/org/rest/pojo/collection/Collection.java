@@ -1,13 +1,15 @@
 package org.rest.pojo.collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Collection {
     Info info;
-    List<Object> item;
+    List<Folder> item;
 
     public Collection() { }
-    public Collection(Info info, List<Object> item) {
+    public Collection(Info info, List<Folder> item) {
         this.info = info;
         this.item = item;
     }
@@ -20,11 +22,11 @@ public class Collection {
         this.info = info;
     }
 
-    public List<Object> getItem() {
+    public List<Folder> getItem() {
         return item;
     }
 
-    public void setItem(List<Object> item) {
+    public void setItem(List<Folder> item) {
         this.item = item;
     }
 }
