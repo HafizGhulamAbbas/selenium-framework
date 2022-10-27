@@ -7,13 +7,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.HashMap;
 
 public class Workspace {
-
-    // For String, default value is null and for integer, it's 0. To prevent, having defaults in the response.
-    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
+    @JsonIgnore
     private int i;
-    @JsonInclude(JsonInclude.Include.NON_NULL) // Empty is super set. We can use Empty to check emptiness and null
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String id;
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonIgnore
     private HashMap<String, String> myHashMap;
 
     private String name;
@@ -27,12 +25,15 @@ public class Workspace {
         this.type = type;
         this.description = description;
     }
-
+    @JsonIgnore
     public int getI() { return i; }
+    @JsonIgnore
     public void setI(int i) { this.i = i; }
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
+    @JsonIgnore
     public HashMap<String, String> getMyHashMap() { return myHashMap; }
+    @JsonIgnore
     public void setMyHashMap(HashMap<String, String> myHashMap) { this.myHashMap = myHashMap; }
     public String getName() {
         return name;
