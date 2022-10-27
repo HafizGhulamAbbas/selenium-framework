@@ -4,13 +4,13 @@ import java.util.List;
 
 public class Folder {
     private String name;
-    List<RequestRoot> requestRoot;
+    List<RequestRoot> item;
 
     public Folder() { }
 
-    public Folder(String name, List<RequestRoot> requestRoot) {
+    public Folder(String name, List<RequestRoot> item) {
         this.name = name;
-        this.requestRoot = requestRoot;
+        this.item = item;
     }
 
     public String getName() {
@@ -21,11 +21,11 @@ public class Folder {
         this.name = name;
     }
 
-    public List<RequestRoot> getRequestRoot() {
-        return requestRoot;
+    public List<RequestRoot> getItem() {
+        return item;
     }
 
-    public void setRequestRoot(List<RequestRoot> requestRoot) {
-        this.requestRoot = requestRoot;
+    public void setItem(List<RequestRoot> item) {
+        this.item = item;
     }
 }

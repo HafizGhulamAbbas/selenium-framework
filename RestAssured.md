@@ -181,7 +181,7 @@ https://sdsglobal.udemy.com/course/rest-assured-api-automation/learn/lecture/252
         "info": {
             "name": "Sample Collection {{$randomInt}}",
             "description": "This is just a sample collection.",
-            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection"
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
         },
         "item": [
             {
