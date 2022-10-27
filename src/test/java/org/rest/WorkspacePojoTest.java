@@ -41,8 +41,8 @@ public class WorkspacePojoTest {
     @Test (dataProvider = "workspace")
     public void workspace_serialize_deserialize(String name, String type, String description){
         Workspace workspace = new Workspace(name, type, description);
-//        HashMap<String, String> myHashMap = new HashMap<String, String>();
-//        workspace.setMyHashMap(myHashMap);
+        HashMap<String, String> myHashMap = new HashMap<String, String>();
+        workspace.setMyHashMap(myHashMap);
         WorkspaceRoot workspaceRoot = new WorkspaceRoot(workspace);
 
         WorkspaceRoot deserializedWorkspaceRoot = given().
