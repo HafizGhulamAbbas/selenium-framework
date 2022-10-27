@@ -170,3 +170,51 @@ Get JSON Array —> writerWithDefaultPrettyPrinter() from ObjectMapper
 RestAssured
 —> Pass String
 —> Pass ArrayNode
+
+
+### Complex POJO
+https://sdsglobal.udemy.com/course/rest-assured-api-automation/learn/lecture/25233256#overview
+
+##### Sample Collection for Which POJO class are created:
+```{
+    "collection": {
+        "info": {
+            "name": "Sample Collection {{$randomInt}}",
+            "description": "This is just a sample collection.",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection"
+        },
+        "item": [
+            {
+                "name": "This is a folder",
+                "item": [
+                    {
+                        "name": "Sample Post Request",
+                        "request": {
+                            "url": "https://postman-echo.com/post",
+                            "method": "POST",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": {
+                                "mode": "raw",
+                                "raw": "{\"data\": \"123\"}"
+                            },
+                            "description": "This is a sample POST Request"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Sample GET Request",
+                "request": {
+                    "url": "https://postman-echo/get",
+                    "method": "GET",
+                    "description": "This is a sample GET Request"
+                }
+            }
+        ]
+    }
+}```
