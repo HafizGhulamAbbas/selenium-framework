@@ -6,10 +6,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.HashMap;
 
+@JsonIgnoreProperties(value = "id", allowSetters = true)
 public class Workspace {
+    // If you want to ignore a field in request or response, like Id. ID is only present in response
+    // De-serialization --> allowSetters
+    // Serialization --> allowGetters
     @JsonIgnore
     private int i;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String id;
     @JsonIgnore
     private HashMap<String, String> myHashMap;
