@@ -241,3 +241,13 @@ https://drive.google.com/file/d/106tyXpysTSq6D32qWYwgD1AGfzkYHTh_/view?usp=shari
 - Challenge-response paradigm
 - Username and password are hashed using MD5 algorithm
 - Working: Client sent userName and password, server send some arguments to client to work on, then client will work upon the requested argus in headers and encoded stuff is send to server in headers. 
+
+###### BEARER
+- It holds a security token to get a certain resource
+
+###### API KEY
+- Usually generated during first time login or signup 
+- Used as a replacement for username and password 
+- Usually fetched from account settings and often it is possible to delete, regenerate and create multiple API keys 
+- Passed as a header or a query parameter or even in the request body 
+- Not secured
