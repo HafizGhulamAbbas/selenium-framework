@@ -236,3 +236,8 @@ https://drive.google.com/file/d/106tyXpysTSq6D32qWYwgD1AGfzkYHTh_/view?usp=shari
 ###### BASIC
 - Base64 encoded username:password in the header. Not secured
 - Example: Authorization --> Basic dXNlck5hbWU6TXlQYXNzd29yZA==
+
+###### DIGEST
+- Challenge-response paradigm
+- Username and password are hashed using MD5 algorithm
+- Working: Client sent userName and password, server send some arguments to client to work on, then client will work upon the requested argus in headers and encoded stuff is send to server in headers. 
