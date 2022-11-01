@@ -226,3 +226,13 @@ https://drive.google.com/file/d/106tyXpysTSq6D32qWYwgD1AGfzkYHTh_/view?usp=shari
         ]
     }
 }```
+```
+### Different Authentication Schemes
+1. Basic
+2. Bearer
+3. Digest
+4. OAuth
+
+###### BASIC
+- Base64 encoded username:password in the header. Not secured
+- Example: Authorization --> Basic dXNlck5hbWU6TXlQYXNzd29yZA==
