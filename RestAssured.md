@@ -268,3 +268,10 @@ https://drive.google.com/file/d/1ZVa0QZWvIRSFahzoZJt3U-aAqyIuEX2C/view?usp=shari
 - Client credentials flow is suitable for Micro services architecture
 https://drive.google.com/file/d/141mBaw7RUe7Ed_TrtjJI2Sk6pGuJXO-Y/view?usp=sharing
 
+
+### Google OAuth2.0
+##### Documentation: https://developers.google.com/identity/protocols/oauth2
+##### Playground: https://developers.google.com/oauthplayground/
+##### Scopes of Google APIs: https://developers.google.com/identity/protocols/oauth2/scopes
+##### Gmail APIs: https://developers.google.com/gmail/api/reference/rest
+##### Email format: https://ostermiller.org/calc/encode.html
