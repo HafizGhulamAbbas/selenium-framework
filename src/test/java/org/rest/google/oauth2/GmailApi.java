@@ -47,4 +47,26 @@ public class GmailApi {
                 get("/users/{userid}/profile").
         then().spec(responseSpecification);
     }
+
+    @Test
+    public void sendMessage(){
+        String msg = "From: connectfb01@gmail.com\n" +
+                "To: hgabbas1122@gmail.com\n" +
+                "Subject: Rest Assured Test Email\n" +
+                "\n" +
+                "Sending from Rest Assured";
+
+        String base64UrlEncodedMsg = Base64.getUrlEncoder().encodeToString(msg.getBytes());
+
+        HashMap<String, String> payload = new HashMap<>();
+        payload.put("raw", base64UrlEncodedMsg);
+
+        given(requestSpecification).
+                basePath("/gmail/v1").
+                pathParam("userid", "connectfb01@gmail.com").
+                body(payload).
+                when().
+                post("/users/{userid}/messages/send").
+                then().spec(responseSpecification);
+    }
 }
