@@ -251,3 +251,20 @@ https://drive.google.com/file/d/106tyXpysTSq6D32qWYwgD1AGfzkYHTh_/view?usp=shari
 - Usually fetched from account settings and often it is possible to delete, regenerate and create multiple API keys 
 - Passed as a header or a query parameter or even in the request body 
 - Not secured
+
+###### OAuth
+- it is related to authorization, not authentication. For authentication, we've OpenId Connect.
+
+
+#### OAuth - Authorization Grant Flow
+- Authorization code grant flow is more secure because the access token is sent over the backend channel
+https://drive.google.com/file/d/16OrxS0iCHcfj8RGRJXrgn3gjVcUokHp8/view?usp=sharing
+
+#### OAuth - Implicit Grant Flow
+- Implicit grant flow is used for JavaScript applications that run inside the browser without a back end
+https://drive.google.com/file/d/1ZVa0QZWvIRSFahzoZJt3U-aAqyIuEX2C/view?usp=sharing
+
+#### OAuth - Client Credentials Flow
+- Client credentials flow is suitable for Micro services architecture
+https://drive.google.com/file/d/141mBaw7RUe7Ed_TrtjJI2Sk6pGuJXO-Y/view?usp=sharing
+
