@@ -275,3 +275,7 @@ https://drive.google.com/file/d/141mBaw7RUe7Ed_TrtjJI2Sk6pGuJXO-Y/view?usp=shari
 ##### Scopes of Google APIs: https://developers.google.com/identity/protocols/oauth2/scopes
 ##### Gmail APIs: https://developers.google.com/gmail/api/reference/rest
 ##### Email format: https://ostermiller.org/calc/encode.html
+
+
+### Form Based Authentication
+- Project URL: https://github.com/dangeabunea/RomanianCoderExamples
