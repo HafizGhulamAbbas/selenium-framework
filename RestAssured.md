@@ -298,3 +298,5 @@ Spotify Playlists API using the OAuth 2.0 flow [Authorization Code Grant Flow]
 ##### Rest Assured Framework Project Structure: 
 https://drive.google.com/file/d/1-mMpz1XdkVQKdpKdtkwag4Axr2ZxHxFC/view?usp=sharing
 
+### Spotify OAuth 2.0 Introduction
+https://developer.spotify.com/documentation/web-api/
