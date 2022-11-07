@@ -63,6 +63,7 @@ public class PlaylistTests {
         assertError(response.as(Error.class), 401, "Invalid access token");
     }
 
+    @Step
     public Playlist playlistBuilder(String name, String description, Boolean _public) {
         return Playlist.builder().
                 name(name).
@@ -71,16 +72,19 @@ public class PlaylistTests {
                 build();
     }
 
+    @Step
     public void assertPlaylistEqual(Playlist responsePlaylist, Playlist requestPlaylist) {
         assertThat(responsePlaylist.getName(), equalTo(requestPlaylist.getName()));
         assertThat(responsePlaylist.getDescription(), equalTo(requestPlaylist.getDescription()));
         assertThat(responsePlaylist.get_public(), equalTo(requestPlaylist.get_public()));
     }
 
+    @Step
     public void assertStatusCode(int actualStatusCode, int expectedStatusCode) {
         assertThat(actualStatusCode, equalTo(expectedStatusCode));
     }
 
+    @Step
     public void assertError(Error responseError, int expectedStatusCode, String expectedMessage) {
         assertThat(responseError.getError().getStatus(), equalTo(expectedStatusCode));
         assertThat(responseError.getError().getMessage(), equalTo(expectedMessage));

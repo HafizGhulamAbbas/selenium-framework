@@ -1,5 +1,6 @@
 package org.spotify.oauth2.api.applicationApi;
 
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.spotify.oauth2.api.RestResource;
 import org.spotify.oauth2.pojo.Playlist;
@@ -11,6 +12,7 @@ import static org.spotify.oauth2.api.TokenManager.getToken;
 
 public class PlaylistApi {
 
+    @Step
     public static Response post(Playlist requestPlaylist) {
         return RestResource.post(USERS + "/" + ConfigLoader.getInstance().getUser()
                 + PLAYLISTS, getToken(), requestPlaylist);
