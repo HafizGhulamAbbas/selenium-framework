@@ -3,6 +3,7 @@ package org.spotify.oauth2.api.applicationApi;
 import io.restassured.response.Response;
 import org.spotify.oauth2.api.RestResource;
 import org.spotify.oauth2.pojo.Playlist;
+import org.spotify.oauth2.utils.ConfigLoader;
 
 import static org.spotify.oauth2.api.Route.PLAYLISTS;
 import static org.spotify.oauth2.api.Route.USERS;
@@ -11,11 +12,13 @@ import static org.spotify.oauth2.api.TokenManager.getToken;
 public class PlaylistApi {
 
     public static Response post(Playlist requestPlaylist) {
-        return RestResource.post(USERS + "/3127ntzuaopscs44bj3jokvgmss4" + PLAYLISTS, getToken(), requestPlaylist);
+        return RestResource.post(USERS + "/" + ConfigLoader.getInstance().getUser()
+                + PLAYLISTS, getToken(), requestPlaylist);
     }
 
     public static Response post(String token, Playlist requestPlaylist) {
-        return RestResource.post(USERS + "/3127ntzuaopscs44bj3jokvgmss4" + PLAYLISTS, token, requestPlaylist);
+        return RestResource.post(USERS + "/" + ConfigLoader.getInstance().getUser()
+                + PLAYLISTS, token, requestPlaylist);
     }
 
     public static Response get(String playlistId) {
