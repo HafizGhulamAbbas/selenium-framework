@@ -1,6 +1,9 @@
 package org.spotify.oauth2.tests;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
+import io.qameta.allure.Link;
+import io.qameta.allure.TmsLink;
 import io.restassured.response.Response;
 import org.spotify.oauth2.api.applicationApi.PlaylistApi;
 import org.spotify.oauth2.pojo.Error;
@@ -13,6 +16,10 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class PlaylistTests {
 
+    @Link("https://example.org")
+    @Link(name = "allure", type = "mylink")
+    @TmsLink("12345")
+    @Issue("134")
     @Description("This is description")
     @Test(description = "Should be able to create a playlist")
     public void shouldBeAbleToCreateAPlaylist() {
