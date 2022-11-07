@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class PlaylistTests {
     RequestSpecification requestSpecification;
     ResponseSpecification responseSpecification;
-    String access_token = "BQCS3Rfa09Myp08WdOGL6HaHc-By5cTIN4t4n_uya9SeP2eamwsn4IihlPHVFW0qQZ-TIZ4mBVlUUVaeZ0wZgHe_khqt5bTqKHBwx_sA-cL7FSAngNkptprX_HHlCSKdgh64z1CIgX8QYTx_QsaPsvoOFXlKO3m_c6W4XyWlgGL6QnFZKXDVg6AUTOjeUePb1seXxzMOXm6A_uB2L5Nz06j8s9xeYSgTi3l9MaIYQMx4aJwTDvB4qTBtmxeQsPraXV9vQNC6NrX62zpE";
+    String access_token = "BQDpn_JR1fXEMWkJBCA83gF5O4TmiV1sP9TpD8aqHf73hA7XGB0QfWLoc8Sy4b-NFyNYUjclY4ebO8qQN6e851MHegoG-MiytzoXP-_nOAvCNmFE4fVGUWzO2-z2s7hiVqicPXU0AiDD7sm9e_KSauD0SLWFpC__cU7YHjTZQJYTBtlANBu-OMKONiyWRQiz7KnhCXNThyLOUf3KIifXtnNxRoUfO6QIbhyk6KLVNK_PFzOW3PCzPn7ALAxbEp4N3oBkwoPXgsiiTnOz";
 
     @BeforeClass
     public void beforeClass() {
@@ -49,6 +49,19 @@ public class PlaylistTests {
         then().spec(responseSpecification).
                 assertThat().
                 statusCode(201).
+                body("name", equalTo("New Playlist"),
+                        "description", equalTo("New playlist description"),
+                        "public", equalTo(false));
+    }
+
+    @Test
+    public void shouldBeAbleToGetAPlaylist() {
+        given(requestSpecification).
+        when().
+                get("/playlists/0EftGzFkFNeFyKqtrkT1Qm").
+        then().spec(responseSpecification).
+                assertThat().
+                statusCode(200).
                 body("name", equalTo("New Playlist"),
                         "description", equalTo("New playlist description"),
                         "public", equalTo(false));
