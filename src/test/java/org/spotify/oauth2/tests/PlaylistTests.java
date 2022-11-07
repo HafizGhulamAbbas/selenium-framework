@@ -1,9 +1,6 @@
 package org.spotify.oauth2.tests;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Issue;
-import io.qameta.allure.Link;
-import io.qameta.allure.TmsLink;
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.spotify.oauth2.api.applicationApi.PlaylistApi;
 import org.spotify.oauth2.pojo.Error;
@@ -14,8 +11,11 @@ import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+@Epic("Spotify OAuth 2.0")
+@Feature("Playlist API")
 public class PlaylistTests {
 
+    @Story("create a playlist story")
     @Link("https://example.org")
     @Link(name = "allure", type = "mylink")
     @TmsLink("12345")
@@ -44,6 +44,7 @@ public class PlaylistTests {
         assertStatusCode(response.statusCode(), 200);
     }
 
+    @Story("create a playlist story")
     @Test
     public void shouldNotBeAbleToCreateAPlaylistWithoutName() {
         Playlist requestPlaylist = playlistBuilder("", "New playlist description", false);
@@ -52,6 +53,7 @@ public class PlaylistTests {
         assertError(response.as(Error.class), 400, "Missing required field: name");
     }
 
+    @Story("create a playlist story")
     @Test
     public void shouldNotBeAbleToCreateAPlaylistWithExpiredToken() {
         String invalid_token = "invalidAccessToken";
