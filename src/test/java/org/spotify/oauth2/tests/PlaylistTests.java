@@ -14,80 +14,63 @@ public class PlaylistTests {
 
     @Test
     public void shouldBeAbleToCreateAPlaylist() {
-        Playlist requestPlaylist = new Playlist().
-                setName("New Playlist").
-                setDescription("New playlist description").
-                setPublic(false);
-
-       Response response = PlaylistApi.post(requestPlaylist);
-       assertThat(response.statusCode(), equalTo(201));
-
-       // Deserialization
-       Playlist responsePlaylist = response.as(Playlist.class);
-
-        assertThat(responsePlaylist.getName(), equalTo(responsePlaylist.getName()));
-        assertThat(responsePlaylist.getDescription(), equalTo(responsePlaylist.getDescription()));
-        assertThat(responsePlaylist.getPublic(), equalTo(responsePlaylist.getPublic()));
+        Playlist requestPlaylist = playlistBuilder("New Playlist", "New playlist description", false);
+        Response response = PlaylistApi.post(requestPlaylist);
+        assertStatusCode(response.statusCode(), 201);
+        assertPlaylistEqual(response.as(Playlist.class), requestPlaylist);
     }
 
     @Test
     public void shouldBeAbleToGetAPlaylist() {
-        Playlist requestPlaylist = new Playlist().
-                setName("New Playlist").
-                setDescription("New playlist description").
-                setPublic(false);
-
+        Playlist requestPlaylist = playlistBuilder("Updated Playlist Name", "Updated playlist description", false);
         Response response = PlaylistApi.get(DataLoader.getInstance().getGetPlaylistId());
-        assertThat(response.statusCode(), equalTo(200));
-
-        Playlist responsePlaylist = response.as(Playlist.class);
-
-        assertThat(responsePlaylist.getName(), equalTo(responsePlaylist.getName()));
-        assertThat(responsePlaylist.getDescription(), equalTo(responsePlaylist.getDescription()));
-        assertThat(responsePlaylist.getPublic(), equalTo(responsePlaylist.getPublic()));
+        assertStatusCode(response.statusCode(), 200);
+        assertPlaylistEqual(response.as(Playlist.class), requestPlaylist);
     }
 
     @Test
     public void shouldBeAbleToUpdateAPlaylist() {
-        Playlist requestPlaylist = new Playlist().
-                setName("Updated Playlist Name").
-                setDescription("Updated playlist description").
-                setPublic(false);
-
+        Playlist requestPlaylist = playlistBuilder("Updated Playlist Name", "Updated playlist description", false);
         Response response = PlaylistApi.update(DataLoader.getInstance().getUpdatePlaylistId(), requestPlaylist);
-        assertThat(response.statusCode(), equalTo(200));
+        assertStatusCode(response.statusCode(), 200);
     }
 
     @Test
     public void shouldNotBeAbleToCreateAPlaylistWithoutName() {
-        Playlist requestPlaylist = new Playlist().
-                setName("").
-                setDescription("New playlist description").
-                setPublic(false);
-
+        Playlist requestPlaylist = playlistBuilder("", "New playlist description", false);
         Response response = PlaylistApi.post(requestPlaylist);
-        assertThat(response.statusCode(), equalTo(400));
-
-        Error error = response.as(Error.class);
-
-        assertThat(error.getError().getStatus(), equalTo(400));
-        assertThat(error.getError().getMessage(), equalTo("Missing required field: name"));
+        assertStatusCode(response.statusCode(), 400);
+        assertError(response.as(Error.class), 400, "Missing required field: name");
     }
 
     @Test
     public void shouldNotBeAbleToCreateAPlaylistWithExpiredToken() {
         String invalid_token = "invalidAccessToken";
-        Playlist requestPlaylist = new Playlist().
-                setName("New Playlist").
-                setDescription("New playlist description").
-                setPublic(false);
-
+        Playlist requestPlaylist = playlistBuilder("New Playlist", "New playlist description", false);
         Response response = PlaylistApi.post(invalid_token, requestPlaylist);
-        assertThat(response.statusCode(), equalTo(401));
+        assertStatusCode(response.statusCode(), 401);
+        assertError(response.as(Error.class), 401, "Invalid access token");
+    }
 
-        Error error = response.as(Error.class);
+    public Playlist playlistBuilder(String name, String description, Boolean _public) {
+        return new Playlist().
+                setName(name).
+                setDescription(description).
+                setPublic(_public);
+    }
 
-        assertThat(error.getError().getStatus(), equalTo(401));
-        assertThat(error.getError().getMessage(), equalTo("Invalid access token"));
+    public void assertPlaylistEqual(Playlist responsePlaylist, Playlist requestPlaylist) {
+        assertThat(responsePlaylist.getName(), equalTo(requestPlaylist.getName()));
+        assertThat(responsePlaylist.getDescription(), equalTo(requestPlaylist.getDescription()));
+        assertThat(responsePlaylist.getPublic(), equalTo(requestPlaylist.getPublic()));
+    }
+
+    public void assertStatusCode(int actualStatusCode, int expectedStatusCode) {
+        assertThat(actualStatusCode, equalTo(expectedStatusCode));
+    }
+
+    public void assertError(Error responseError, int expectedStatusCode, String expectedMessage) {
+        assertThat(responseError.getError().getStatus(), equalTo(expectedStatusCode));
+        assertThat(responseError.getError().getMessage(), equalTo(expectedMessage));
     }
 }
