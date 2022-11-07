@@ -1,6 +1,10 @@
 package org.spotify.oauth2.api;
 
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+
+import java.util.HashMap;
+
 import static io.restassured.RestAssured.given;
 import static org.spotify.oauth2.api.SpecBuilder.getRequestSpec;
 import static org.spotify.oauth2.api.SpecBuilder.getResponseSpec;
@@ -13,6 +17,19 @@ public class RestResource {
                 header("Authorization", "Bearer " + access_token).
         when().
                 post(path).
+        then().spec(getResponseSpec()).
+                extract().
+                response();
+    }
+
+    public static Response postAccount(HashMap<String, String> formParams) {
+        return given().
+                baseUri("https://accounts.spotify.com").
+                contentType(ContentType.URLENC).
+                formParams(formParams).
+                log().all().
+        when().
+                post("/api/token").
         then().spec(getResponseSpec()).
                 extract().
                 response();

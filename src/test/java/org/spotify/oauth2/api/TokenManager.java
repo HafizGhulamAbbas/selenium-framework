@@ -39,16 +39,7 @@ public class TokenManager {
         formParams.put("grant_type", "refresh_token");
         formParams.put("refresh_token", "AQBGzXamGAJzhl915c2O5HUtOq710vYwlfY7HfBgX-au0F9_g7uJxEU7_ycGR8qJOKRmcjiX_l_OQapVK-nVZjD34UscuwyGoqxKSEFmJBHX-vBk6gESNb0u6CE5gdx94co");
 
-        Response response = given().
-                baseUri("https://accounts.spotify.com").
-                contentType(ContentType.URLENC).
-                formParams(formParams).
-                log().all().
-        when().
-                post("/api/token").
-        then().spec(getResponseSpec()).
-                extract().
-                response();
+        Response response = RestResource.postAccount(formParams);
 
         if(response.statusCode() != 200) {
             throw new RuntimeException("ABORT! Failed to fetch new token.");
