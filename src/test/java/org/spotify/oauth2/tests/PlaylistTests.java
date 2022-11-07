@@ -53,11 +53,11 @@ public class PlaylistTests {
     }
 
     public Playlist playlistBuilder(String name, String description, Boolean _public) {
-        Playlist playlist = new Playlist();
-        playlist.setName(name);
-        playlist.setDescription(description);
-        playlist.set_public(false);
-        return playlist;
+        return Playlist.builder().
+                name(name).
+                description(description).
+                _public(_public).
+                build();
     }
 
     public void assertPlaylistEqual(Playlist responsePlaylist, Playlist requestPlaylist) {

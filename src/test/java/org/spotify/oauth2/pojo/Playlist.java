@@ -3,42 +3,46 @@ package org.spotify.oauth2.pojo;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lombok.extern.jackson.Jacksonized;
 
-@Getter @Setter
+@Value
+// @Data
+// @Getter @Setter
+@Jacksonized
+@Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Playlist {
 
     @JsonProperty("collaborative")
-    private Boolean collaborative;
+    Boolean collaborative;
     @JsonProperty("description")
-    private String description;
+    String description;
     @JsonProperty("external_urls")
-    private ExternalUrls externalUrls;
+    ExternalUrls externalUrls;
     @JsonProperty("followers")
-    private Followers followers;
+    Followers followers;
     @JsonProperty("href")
-    private String href;
+    String href;
     @JsonProperty("id")
-    private String id;
+    String id;
     @JsonProperty("images")
-    private List<Object> images = null;
+    List<Object> images;
     @JsonProperty("name")
-    private String name;
+    String name;
     @JsonProperty("owner")
-    private Owner owner;
+    Owner owner;
     @JsonProperty("primary_color")
-    private Object primaryColor;
+    Object primaryColor;
     @JsonProperty("public")
-    private Boolean _public;
+    Boolean _public;
     @JsonProperty("snapshot_id")
-    private String snapshotId;
+    String snapshotId;
     @JsonProperty("tracks")
-    private Tracks tracks;
+    Tracks tracks;
     @JsonProperty("type")
-    private String type;
+    String type;
     @JsonProperty("uri")
-    private String uri;
+    String uri;
 
 }
