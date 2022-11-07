@@ -300,3 +300,7 @@ https://drive.google.com/file/d/1-mMpz1XdkVQKdpKdtkwag4Axr2ZxHxFC/view?usp=shari
 
 ### Spotify OAuth 2.0 Introduction
 https://developer.spotify.com/documentation/web-api/
+
+
+### JSON Schema to POJO convertor
+https://www.jsonschema2pojo.org/
