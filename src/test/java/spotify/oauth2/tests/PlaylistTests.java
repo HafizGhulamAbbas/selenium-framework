@@ -30,7 +30,7 @@ public class PlaylistTests {
         requestSpecification = requestSpecBuilder.build();
 
         ResponseSpecBuilder responseSpecBuilder = new ResponseSpecBuilder().
-                expectContentType(ContentType.JSON).
+//                expectContentType(ContentType.JSON).
                 log(LogDetail.ALL);
         responseSpecification = responseSpecBuilder.build();
     }
@@ -65,5 +65,21 @@ public class PlaylistTests {
                 body("name", equalTo("New Playlist"),
                         "description", equalTo("New playlist description"),
                         "public", equalTo(false));
+    }
+
+    @Test
+    public void shouldBeAbleToUpdateAPlaylist() {
+        String payload = "{\n" +
+                "  \"name\": \"Updated Playlist Name\",\n" +
+                "  \"description\": \"Updated playlist description\",\n" +
+                "  \"public\": false\n" +
+                "}";
+        given(requestSpecification).
+                body(payload).
+        when().
+                put("/playlists/0EftGzFkFNeFyKqtrkT1Qm").
+        then().spec(responseSpecification).
+                assertThat().
+                statusCode(200);
     }
 }
