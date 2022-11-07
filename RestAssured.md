@@ -307,3 +307,10 @@ https://www.jsonschema2pojo.org/
 
 ### Lombok
 https://projectlombok.org/
+
+
+### Allure Reporting
+https://docs.qameta.io/allure/
+
+###### Install allure framework
+https://docs.qameta.io/allure/#_get_started
