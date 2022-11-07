@@ -3,14 +3,36 @@ package org.spotify.oauth2.api;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
+import java.time.Instant;
 import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
 import static org.spotify.oauth2.api.SpecBuilder.getResponseSpec;
 
 public class TokenManager {
+    private static String access_token;
+    private static Instant expiry_time;
 
-    public static String renewToken() {
+    public static String getToken() {
+        try {
+            if(access_token == null || Instant.now().isAfter(expiry_time)) {
+                System.out.println("Renewing token ...");
+                Response response = renewToken();
+                access_token = response.path("access_token");
+                int expiryDurationInSeconds = response.path("expires_in");
+                expiry_time = Instant.now().plusSeconds(expiryDurationInSeconds - 300);
+            }
+            else {
+                System.out.println("Token is good to use.");
+            }
+        }
+        catch (Exception e) {
+            throw new RuntimeException("ABORT! Failed to get token.");
+        }
+        return access_token;
+    }
+
+    private static Response renewToken() {
         HashMap<String, String> formParams = new HashMap<String, String>();
         formParams.put("client_id", "189434f2382e4d799a65be47178dc725");
         formParams.put("client_secret", "083ec36921c141029d590e5949980f87");
@@ -21,6 +43,7 @@ public class TokenManager {
                 baseUri("https://accounts.spotify.com").
                 contentType(ContentType.URLENC).
                 formParams(formParams).
+                log().all().
         when().
                 post("/api/token").
         then().spec(getResponseSpec()).
@@ -30,7 +53,7 @@ public class TokenManager {
         if(response.statusCode() != 200) {
             throw new RuntimeException("ABORT! Failed to fetch new token.");
         }
-        return response.path("access_token");
+        return response;
     }
 
 }
