@@ -318,3 +318,5 @@ https://docs.qameta.io/allure/#_get_started
 ##### Generate Report using command
 `allure serve allure-results`
 
+##### RestAssured Allure 
+https://github.com/allure-framework/allure-java
