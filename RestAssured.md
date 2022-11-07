@@ -279,3 +279,22 @@ https://drive.google.com/file/d/141mBaw7RUe7Ed_TrtjJI2Sk6pGuJXO-Y/view?usp=shari
 
 ### Form Based Authentication
 - Project URL: https://github.com/dangeabunea/RomanianCoderExamples
+
+
+# What are we automating?
+Spotify Playlists API using the OAuth 2.0 flow [Authorization Code Grant Flow]
+
+- Create a Playlist
+- Get a Playlist
+- Change a Playlist’s Details
+
+### Test Cases:
+- shouldBeAbleToCreateAPlaylist 
+- shouldNotBeAbleToCreateAPlaylistWithoutName 
+- shouldNotBeAbleToCreateAPlaylistIfTokenIsExpired 
+- shouldBeAbleToFetchAGivenPlaylist 
+- shouldBeAbleToUpdateAGivenPlaylist
+
+##### Rest Assured Framework Project Structure: 
+https://drive.google.com/file/d/1-mMpz1XdkVQKdpKdtkwag4Axr2ZxHxFC/view?usp=sharing
+
