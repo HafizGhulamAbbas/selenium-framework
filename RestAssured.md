@@ -314,3 +314,7 @@ https://docs.qameta.io/allure/
 
 ###### Install allure framework
 https://docs.qameta.io/allure/#_get_started
+
+##### Generate Report using command
+`allure serve allure-results`
+
