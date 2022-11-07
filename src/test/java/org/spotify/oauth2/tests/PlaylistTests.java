@@ -4,6 +4,7 @@ import io.restassured.response.Response;
 import org.spotify.oauth2.api.applicationApi.PlaylistApi;
 import org.spotify.oauth2.pojo.Error;
 import org.spotify.oauth2.pojo.Playlist;
+import org.spotify.oauth2.utils.DataLoader;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -36,7 +37,7 @@ public class PlaylistTests {
                 setDescription("New playlist description").
                 setPublic(false);
 
-        Response response = PlaylistApi.get("3bW3BNOhxJiAjtBhcsV7iF");
+        Response response = PlaylistApi.get(DataLoader.getInstance().getGetPlaylistId());
         assertThat(response.statusCode(), equalTo(200));
 
         Playlist responsePlaylist = response.as(Playlist.class);
@@ -53,7 +54,7 @@ public class PlaylistTests {
                 setDescription("Updated playlist description").
                 setPublic(false);
 
-        Response response = PlaylistApi.update("3bW3BNOhxJiAjtBhcsV7iF", requestPlaylist);
+        Response response = PlaylistApi.update(DataLoader.getInstance().getUpdatePlaylistId(), requestPlaylist);
         assertThat(response.statusCode(), equalTo(200));
     }
 
