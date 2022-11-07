@@ -6,8 +6,7 @@ import io.restassured.response.Response;
 import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
-import static org.spotify.oauth2.api.SpecBuilder.getRequestSpec;
-import static org.spotify.oauth2.api.SpecBuilder.getResponseSpec;
+import static org.spotify.oauth2.api.SpecBuilder.*;
 
 public class RestResource {
 
@@ -23,11 +22,8 @@ public class RestResource {
     }
 
     public static Response postAccount(HashMap<String, String> formParams) {
-        return given().
-                baseUri("https://accounts.spotify.com").
-                contentType(ContentType.URLENC).
+        return given(getAccountRequestSpec()).
                 formParams(formParams).
-                log().all().
         when().
                 post("/api/token").
         then().spec(getResponseSpec()).
