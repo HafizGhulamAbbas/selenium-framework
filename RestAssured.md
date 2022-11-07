@@ -304,3 +304,6 @@ https://developer.spotify.com/documentation/web-api/
 
 ### JSON Schema to POJO convertor
 https://www.jsonschema2pojo.org/
+
+### Lombok
+https://projectlombok.org/

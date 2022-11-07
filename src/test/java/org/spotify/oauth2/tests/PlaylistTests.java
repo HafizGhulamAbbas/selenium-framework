@@ -53,16 +53,17 @@ public class PlaylistTests {
     }
 
     public Playlist playlistBuilder(String name, String description, Boolean _public) {
-        return new Playlist().
-                setName(name).
-                setDescription(description).
-                setPublic(_public);
+        Playlist playlist = new Playlist();
+        playlist.setName(name);
+        playlist.setDescription(description);
+        playlist.set_public(false);
+        return playlist;
     }
 
     public void assertPlaylistEqual(Playlist responsePlaylist, Playlist requestPlaylist) {
         assertThat(responsePlaylist.getName(), equalTo(requestPlaylist.getName()));
         assertThat(responsePlaylist.getDescription(), equalTo(requestPlaylist.getDescription()));
-        assertThat(responsePlaylist.getPublic(), equalTo(requestPlaylist.getPublic()));
+        assertThat(responsePlaylist.get_public(), equalTo(requestPlaylist.get_public()));
     }
 
     public void assertStatusCode(int actualStatusCode, int expectedStatusCode) {
