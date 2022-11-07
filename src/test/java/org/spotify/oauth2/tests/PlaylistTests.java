@@ -12,7 +12,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class PlaylistTests {
 
-    @Test
+    @Test(description = "Should be able to create a playlist")
     public void shouldBeAbleToCreateAPlaylist() {
         Playlist requestPlaylist = playlistBuilder("New Playlist", "New playlist description", false);
         Response response = PlaylistApi.post(requestPlaylist);
