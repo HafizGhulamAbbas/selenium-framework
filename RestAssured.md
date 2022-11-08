@@ -320,3 +320,7 @@ https://docs.qameta.io/allure/#_get_started
 
 ##### RestAssured Allure 
 https://github.com/allure-framework/allure-java
+
+##### JAVA Faker API
+https://github.com/DiUS/java-faker
+

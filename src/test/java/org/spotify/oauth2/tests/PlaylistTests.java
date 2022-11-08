@@ -10,6 +10,8 @@ import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.spotify.oauth2.utils.FakerUtils.generateDescription;
+import static org.spotify.oauth2.utils.FakerUtils.generateName;
 
 @Epic("Spotify OAuth 2.0")
 @Feature("Playlist API")
@@ -23,7 +25,7 @@ public class PlaylistTests {
     @Description("This is description")
     @Test(description = "Should be able to create a playlist")
     public void shouldBeAbleToCreateAPlaylist() {
-        Playlist requestPlaylist = playlistBuilder("New Playlist", "New playlist description", false);
+        Playlist requestPlaylist = playlistBuilder(generateName(), generateDescription(), false);
         Response response = PlaylistApi.post(requestPlaylist);
         assertStatusCode(response.statusCode(), 201);
         assertPlaylistEqual(response.as(Playlist.class), requestPlaylist);
@@ -39,7 +41,7 @@ public class PlaylistTests {
 
     @Test
     public void shouldBeAbleToUpdateAPlaylist() {
-        Playlist requestPlaylist = playlistBuilder("Updated Playlist Name", "Updated playlist description", false);
+        Playlist requestPlaylist = playlistBuilder(generateName(), generateDescription(), false);
         Response response = PlaylistApi.update(DataLoader.getInstance().getUpdatePlaylistId(), requestPlaylist);
         assertStatusCode(response.statusCode(), 200);
     }
@@ -47,7 +49,7 @@ public class PlaylistTests {
     @Story("create a playlist story")
     @Test
     public void shouldNotBeAbleToCreateAPlaylistWithoutName() {
-        Playlist requestPlaylist = playlistBuilder("", "New playlist description", false);
+        Playlist requestPlaylist = playlistBuilder("", generateDescription(), false);
         Response response = PlaylistApi.post(requestPlaylist);
         assertStatusCode(response.statusCode(), 400);
         assertError(response.as(Error.class), 400, "Missing required field: name");
@@ -57,7 +59,7 @@ public class PlaylistTests {
     @Test
     public void shouldNotBeAbleToCreateAPlaylistWithExpiredToken() {
         String invalid_token = "invalidAccessToken";
-        Playlist requestPlaylist = playlistBuilder("New Playlist", "New playlist description", false);
+        Playlist requestPlaylist = playlistBuilder(generateName(), generateDescription(), false);
         Response response = PlaylistApi.post(invalid_token, requestPlaylist);
         assertStatusCode(response.statusCode(), 401);
         assertError(response.as(Error.class), 401, "Invalid access token");
