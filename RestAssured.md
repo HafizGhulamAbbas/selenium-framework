@@ -324,3 +324,7 @@ https://github.com/allure-framework/allure-java
 ##### JAVA Faker API
 https://github.com/DiUS/java-faker
 
+
+##### Multiple Environment Command
+`mvn test -Dtest="PlaylistTests" -DBASE_URI="https://api.spotify.com" -DACCOUNT_BASE_URI="https://accounts.spotify.com"`
+
