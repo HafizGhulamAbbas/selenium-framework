@@ -16,7 +16,7 @@ import static org.spotify.oauth2.utils.FakerUtils.generateName;
 
 @Epic("Spotify OAuth 2.0")
 @Feature("Playlist API")
-public class PlaylistTests {
+public class PlaylistTests extends BaseTest {
 
     @Story("create a playlist story")
     @Link("https://example.org")
