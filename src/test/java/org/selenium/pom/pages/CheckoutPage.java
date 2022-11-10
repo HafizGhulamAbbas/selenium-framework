@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.selenium.pom.base.BasePage;
 import org.selenium.pom.objects.BillingAddress;
 import org.selenium.pom.objects.User;
@@ -22,6 +23,8 @@ public class CheckoutPage extends BasePage {
     private final By passwordField = By.id("password");
     private final By loginButton = By.className("login");
     private final By overlay = By.cssSelector(".blockUI.blockOverlay");
+    private final By countryDropdown = By.id("billing_country");
+    private final By stateDropdown = By.id("billing_state");
     public CheckoutPage(WebDriver driver) {
         super(driver);
     }
@@ -38,6 +41,12 @@ public class CheckoutPage extends BasePage {
         driver.findElement(lastNameField).sendKeys(lastName);
         return this;
     }
+    public CheckoutPage selectCountry(String countryName) {
+        Select select = new Select(driver.findElement(countryDropdown));
+        select.selectByVisibleText(countryName);
+        return this;
+    }
+
     public CheckoutPage enterAddressLineOne(String addressLineOne) {
         driver.findElement(addressLineOneField).clear();
         driver.findElement(addressLineOneField).sendKeys(addressLineOne);
@@ -46,6 +55,11 @@ public class CheckoutPage extends BasePage {
     public CheckoutPage enterCity(String city) {
         driver.findElement(billingCityField).clear();
         driver.findElement(billingCityField).sendKeys(city);
+        return this;
+    }
+    public CheckoutPage selectState(String stateName) {
+        Select select = new Select(driver.findElement(stateDropdown));
+        select.selectByVisibleText(stateName);
         return this;
     }
     public CheckoutPage enterPostCode(String postCode) {
@@ -91,8 +105,10 @@ public class CheckoutPage extends BasePage {
     public CheckoutPage fillBillingInformation(BillingAddress billingAddress) {
         return enterFirstName(billingAddress.getFirstName()).
                 enterLastName(billingAddress.getLastName()).
+                selectCountry(billingAddress.getCountry()).
                 enterAddressLineOne(billingAddress.getAddressLineOne()).
                 enterCity(billingAddress.getCity()).
+                selectState(billingAddress.getState()).
                 enterPostCode(billingAddress.getPostalCode()).
                 enterEmail(billingAddress.getEmail());
     }
