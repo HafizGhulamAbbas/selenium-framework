@@ -13,13 +13,15 @@ import org.testng.annotations.Test;
 public class AppTest extends BaseTest {
     @Test
     public void guestCheckoutUsingDirectBankTransfer() throws InterruptedException {
-        BillingAddress billingAddress = new BillingAddress().
+        /*BillingAddress billingAddress = new BillingAddress().
                 setFirstName("John").
                 setLastName("Adam").
                 setAddressLineOne("San Francisco").
                 setCity("New York").
                 setPostalCode("94148").
-                setEmail("askomdch@gmail.com");
+                setEmail("askomdch@gmail.com");*/
+
+        BillingAddress billingAddress = new BillingAddress("John", "Adam", "San Francisco", "New York", "94148", "askomdch@gmail.com");
 
         StorePage storePage = new HomePage(driver)
                 .load()
