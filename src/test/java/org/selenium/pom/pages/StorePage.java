@@ -28,6 +28,11 @@ public class StorePage extends BasePage {
     }
     public StorePage clickAddToCardButton(String productName) {
         By addToCartButton = getAddToCartButtonElement(productName);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         driver.findElement(addToCartButton).click();
         return this;
     }
