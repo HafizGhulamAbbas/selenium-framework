@@ -8,9 +8,7 @@ public class BillingAddress {
     private String postalCode;
     private String email;
 
-    public BillingAddress() {
-
-    }
+    public BillingAddress() { }
 
     public BillingAddress(String firstName, String lastName, String addressLineOne, String city, String postalCode, String email) {
         this.firstName = firstName;

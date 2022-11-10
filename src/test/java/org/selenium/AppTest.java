@@ -7,21 +7,20 @@ import org.selenium.pom.pages.CartPage;
 import org.selenium.pom.pages.CheckoutPage;
 import org.selenium.pom.pages.HomePage;
 import org.selenium.pom.pages.StorePage;
+import org.selenium.pom.utils.JacksonUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 public class AppTest extends BaseTest {
     @Test
-    public void guestCheckoutUsingDirectBankTransfer() throws InterruptedException {
-        /*BillingAddress billingAddress = new BillingAddress().
-                setFirstName("John").
-                setLastName("Adam").
-                setAddressLineOne("San Francisco").
-                setCity("New York").
-                setPostalCode("94148").
-                setEmail("askomdch@gmail.com");*/
+    public void guestCheckoutUsingDirectBankTransfer() throws InterruptedException, IOException {
+        BillingAddress billingAddress = new BillingAddress();
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("billingAddress.json");
 
-        BillingAddress billingAddress = new BillingAddress("John", "Adam", "San Francisco", "New York", "94148", "askomdch@gmail.com");
+        billingAddress = JacksonUtils.deserializeJson(inputStream, billingAddress);
 
         StorePage storePage = new HomePage(driver)
                 .load()

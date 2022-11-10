@@ -32,6 +32,11 @@ public class StorePage extends BasePage {
         return this;
     }
     public StorePage searchProduct(String name) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         driver.findElement(searchInput).sendKeys(name);
         driver.findElement(searchButton).click();
         return this;
