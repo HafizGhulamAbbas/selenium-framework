@@ -63,4 +63,10 @@
 1. Keep the BasePage and BaseTest as simple as can
 
 ### Concepts
-1. After action, if reload new page, then return the object of that page --> **Fluent Interface**
+###### Fluent Interface and Builder Pattern
+
+On HomePage, when click storeMenuLink, it loads the store page. We’re no more on the HomePage. And for the store page, we can create the object explicitly in our test class. But, if you know the behaviour of application. And if it is going to remain same every time, that is, every time the store page is going to load, then instead of explicitly creating the store page object, what we can do it after clicking the store menu link, we pass the handle to store page. Basically, we can return StorePage object through clickStoreMenuLink function. This is called Fluent Interface. This makes the code more readable.
+
+##### Conclusion:
+- If after action (like clicking a link), reload a new page —> return that page in the function —> Fluent Interface (Tight coupling among pages. Some people doesn’t like)
+- If after action (like clicking a show button), stay on the same page —> don’t do anything the function —> Builder method
