@@ -1,11 +1,9 @@
 package org.selenium.pom.objects;
 
 import org.selenium.pom.utils.JacksonUtils;
-
 import java.io.IOException;
 
 public class Product {
-
     private int id;
     private String name;
 
