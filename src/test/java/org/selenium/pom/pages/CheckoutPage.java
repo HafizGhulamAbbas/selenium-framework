@@ -31,8 +31,10 @@ public class CheckoutPage extends BasePage {
     }
 
     public CheckoutPage enterFirstName(String firstName) {
-        driver.findElement(firstNameField).clear();
-        driver.findElement(firstNameField).sendKeys(firstName);
+        // WebElement element = getElement(firstNameField);
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(firstNameField));
+        element.clear();
+        element.sendKeys(firstName);
         return this;
     }
     public CheckoutPage enterLastName(String lastName) {
@@ -66,22 +68,22 @@ public class CheckoutPage extends BasePage {
         return this;
     }
     public String getNotice() {
-        return driver.findElement(successNotice).getText();
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(successNotice)).getText();
     }
     public CheckoutPage clickHereToLoginLink() {
-        driver.findElement(clickHereToLoginLink).click();
+        wait.until(ExpectedConditions.elementToBeClickable(clickHereToLoginLink)).click();
         return this;
     }
     public CheckoutPage enterUsername(String username) {
-        driver.findElement(usernameField).sendKeys(username);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(usernameField)).sendKeys(username);
         return this;
     }
     public CheckoutPage enterPassword(String password) {
-        driver.findElement(passwordField).sendKeys(password);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(passwordField)).sendKeys(password);
         return this;
     }
     public CheckoutPage clickLoginButton() {
-        driver.findElement(loginButton).click();
+        wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
         return this;
     }
     public CheckoutPage login(User user) {

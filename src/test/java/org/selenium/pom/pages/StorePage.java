@@ -2,6 +2,7 @@ package org.selenium.pom.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.selenium.pom.base.BasePage;
 
 public class StorePage extends BasePage {
@@ -13,27 +14,27 @@ public class StorePage extends BasePage {
         super(driver);
     }
     public StorePage enterProductInSearchField(String name) {
-        driver.findElement(searchInput).sendKeys(name);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(searchInput)).sendKeys(name);
         return this;
     }
     public StorePage clickSearchButton() {
-        driver.findElement(searchButton).click();
+        wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
         return this;
     }
     public String getTitle() {
-        return driver.findElement(title).getText();
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(title)).getText();
     }
     private By getAddToCartButtonElement(String productName) {
         return By.cssSelector("a[aria-label='Add “" + productName + "” to your cart']");
     }
     public StorePage clickAddToCardButton(String productName) {
         By addToCartButton = getAddToCartButtonElement(productName);
-        driver.findElement(addToCartButton).click();
+        wait.until(ExpectedConditions.elementToBeClickable(addToCartButton)).click();
         return this;
     }
     public StorePage searchProduct(String name) {
-        driver.findElement(searchInput).sendKeys(name);
-        driver.findElement(searchButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(searchInput)).sendKeys(name);
+        wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
         return this;
     }
 
@@ -44,7 +45,7 @@ public class StorePage extends BasePage {
         return this;
     }
     public CartPage clickViewCart() {
-        driver.findElement(viewCartLink).click();
+        wait.until(ExpectedConditions.elementToBeClickable(viewCartLink)).click();
         return new CartPage(driver);
     }
 }

@@ -11,9 +11,15 @@ import java.util.List;
 
 public class BasePage {
     protected WebDriver driver;
+    protected WebDriverWait wait;
+    protected WebDriverWait waitShort;
+    protected WebDriverWait waitLong;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        /*waitShort = new WebDriverWait(driver, Duration.ofSeconds(8));
+        waitLong = new WebDriverWait(driver, Duration.ofSeconds(15));*/
     }
     public void load(String endpoint) {
         driver.get("https://askomdch.com/" + endpoint);
@@ -22,9 +28,11 @@ public class BasePage {
     public void waitForOverlaysToDisappear(By overlay) {
         List<WebElement> overlays = driver.findElements(overlay);
         if(overlays.size() > 0) {
-            new WebDriverWait(driver, Duration.ofSeconds(15)).until(
-                    ExpectedConditions.invisibilityOfAllElements(overlays)
-            );
+            wait.until(ExpectedConditions.invisibilityOfAllElements(overlays));
         }
     }
+
+    /*public WebElement getElement(By element) {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+    }*/
 }
