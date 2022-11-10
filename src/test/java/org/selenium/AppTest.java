@@ -20,10 +20,10 @@ public class AppTest extends BaseTest {
         BillingAddress billingAddress = JacksonUtils.deserializeJson("billingAddress.json", BillingAddress.class);
         Product product = new Product(1215);
 
-        StorePage storePage = new HomePage(driver)
-                .load()
-                .navigateToStoreUsingMenu()
-                .searchProduct(searchFor);
+        StorePage storePage = new HomePage(driver).
+                load().
+                navigateToStoreUsingMenu().
+                searchProduct(searchFor);
 
         Assert.assertEquals(storePage.getTitle(), "Search results: “" + searchFor + "”");
         storePage.clickAddToCardButton(product.getName());
@@ -31,8 +31,9 @@ public class AppTest extends BaseTest {
         Assert.assertEquals(cartPage.getProductName(), product.getName());
         CheckoutPage checkoutPage = cartPage.
                 checkout().
-                fillBillingInformation(billingAddress)
-                .placeOrder();
+                fillBillingInformation(billingAddress).
+                selectDirectBankTransfer().
+                placeOrder();
         Assert.assertEquals(
                 checkoutPage.getNotice(),
                 "Thank you. Your order has been received."
@@ -46,10 +47,10 @@ public class AppTest extends BaseTest {
         Product product = new Product(1215);
         User user = new User("demouser2", "demopwd");
 
-        StorePage storePage = new HomePage(driver)
-                .load()
-                .navigateToStoreUsingMenu()
-                .searchProduct(searchFor);
+        StorePage storePage = new HomePage(driver).
+                load().
+                navigateToStoreUsingMenu().
+                searchProduct(searchFor);
         Assert.assertEquals(storePage.getTitle(), "Search results: “" + searchFor + "”");
 
         storePage.clickAddToCardButton(product.getName());
@@ -59,10 +60,11 @@ public class AppTest extends BaseTest {
 
         CheckoutPage checkoutPage = cartPage.checkout();
         checkoutPage.clickHereToLoginLink();
-        checkoutPage
-                .login(user)
-                .fillBillingInformation(billingAddress)
-                .placeOrder();
+        checkoutPage.
+                login(user).
+                fillBillingInformation(billingAddress).
+                selectDirectBankTransfer().
+                placeOrder();
         Assert.assertEquals(
                 checkoutPage.getNotice(),
                 "Thank you. Your order has been received."

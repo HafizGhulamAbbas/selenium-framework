@@ -25,6 +25,7 @@ public class CheckoutPage extends BasePage {
     private final By overlay = By.cssSelector(".blockUI.blockOverlay");
     private final By countryDropdown = By.id("billing_country");
     private final By stateDropdown = By.id("billing_state");
+    private final By directBankTransferRadioButton = By.id("payment_method_bacs");
     public CheckoutPage(WebDriver driver) {
         super(driver);
     }
@@ -101,7 +102,6 @@ public class CheckoutPage extends BasePage {
                 .enterPassword(user.getPassword())
                 .clickLoginButton();
     }
-
     public CheckoutPage fillBillingInformation(BillingAddress billingAddress) {
         return enterFirstName(billingAddress.getFirstName()).
                 enterLastName(billingAddress.getLastName()).
@@ -111,5 +111,12 @@ public class CheckoutPage extends BasePage {
                 selectState(billingAddress.getState()).
                 enterPostCode(billingAddress.getPostalCode()).
                 enterEmail(billingAddress.getEmail());
+    }
+    public CheckoutPage selectDirectBankTransfer() {
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(directBankTransferRadioButton));
+        if(!element.isSelected()) {
+            element.click();
+        }
+        return this;
     }
 }
