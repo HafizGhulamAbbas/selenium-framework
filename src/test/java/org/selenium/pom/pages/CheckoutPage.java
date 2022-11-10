@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.selenium.pom.base.BasePage;
 import org.selenium.pom.objects.BillingAddress;
+import org.selenium.pom.objects.User;
 
 public class CheckoutPage extends BasePage {
     private final By firstNameField = By.id("billing_first_name");
@@ -75,9 +76,9 @@ public class CheckoutPage extends BasePage {
         driver.findElement(loginButton).click();
         return this;
     }
-    public CheckoutPage login(String username, String password) {
-        return enterUsername(username)
-                .enterPassword(password)
+    public CheckoutPage login(User user) {
+        return enterUsername(user.getUsername())
+                .enterPassword(user.getPassword())
                 .clickLoginButton();
     }
 
