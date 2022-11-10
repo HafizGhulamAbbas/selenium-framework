@@ -30,14 +30,12 @@ public class AppTest extends BaseTest {
 
         Assert.assertEquals(storePage.getTitle(), "Search results: “" + searchFor + "”");
         storePage.clickAddToCardButton(product.getName());
-        Thread.sleep(5000);
         CartPage cartPage = storePage.clickViewCart();
         Assert.assertEquals(cartPage.getProductName(), product.getName());
         CheckoutPage checkoutPage = cartPage.
                 checkout().
                 fillBillingInformation(billingAddress)
                 .placeOrder();
-        Thread.sleep(5000);
         Assert.assertEquals(
                 checkoutPage.getNotice(),
                 "Thank you. Your order has been received."
@@ -58,19 +56,16 @@ public class AppTest extends BaseTest {
         Assert.assertEquals(storePage.getTitle(), "Search results: “" + searchFor + "”");
 
         storePage.clickAddToCardButton(product.getName());
-        Thread.sleep(5000);
         CartPage cartPage = storePage.clickViewCart();
 
         Assert.assertEquals(cartPage.getProductName(), product.getName());
 
         CheckoutPage checkoutPage = cartPage.checkout();
         checkoutPage.clickHereToLoginLink();
-        Thread.sleep(3000);
         checkoutPage
                 .login(user)
                 .fillBillingInformation(billingAddress)
                 .placeOrder();
-        Thread.sleep(5000);
         Assert.assertEquals(
                 checkoutPage.getNotice(),
                 "Thank you. Your order has been received."

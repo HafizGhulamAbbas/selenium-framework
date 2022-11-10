@@ -2,9 +2,15 @@ package org.selenium.pom.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.selenium.pom.base.BasePage;
 import org.selenium.pom.objects.BillingAddress;
 import org.selenium.pom.objects.User;
+
+import java.time.Duration;
+import java.util.List;
 
 public class CheckoutPage extends BasePage {
     private final By firstNameField = By.id("billing_first_name");
@@ -19,6 +25,7 @@ public class CheckoutPage extends BasePage {
     private final By usernameField = By.id("username");
     private final By passwordField = By.id("password");
     private final By loginButton = By.className("login");
+    private final By overlay = By.cssSelector(".blockUI.blockOverlay");
     public CheckoutPage(WebDriver driver) {
         super(driver);
     }
@@ -54,6 +61,12 @@ public class CheckoutPage extends BasePage {
         return this;
     }
     public CheckoutPage placeOrder() {
+        List<WebElement> overlays = driver.findElements(overlay);
+        if(overlays.size() > 0) {
+            new WebDriverWait(driver, Duration.ofSeconds(15)).until(
+                    ExpectedConditions.invisibilityOfAllElements(overlays)
+            );
+        }
         driver.findElement(placeOrderButton).click();
         return this;
     }
