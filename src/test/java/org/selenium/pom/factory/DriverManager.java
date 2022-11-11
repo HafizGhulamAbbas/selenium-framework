@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class DriverManager {
     public WebDriver initializeDriver() {
-        WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver().cachePath("Drivers").setup();
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         // driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));

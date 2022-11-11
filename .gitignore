@@ -29,6 +29,7 @@ hs_err_pid*
 ## Maven
 ##############################
 target/
+Drivers/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
