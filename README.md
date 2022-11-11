@@ -70,3 +70,6 @@ On HomePage, when click storeMenuLink, it loads the store page. We’re no more 
 ##### Conclusion:
 - If after action (like clicking a link), reload a new page —> return that page in the function —> Fluent Interface (Tight coupling among pages. Some people doesn’t like)
 - If after action (like clicking a show button), stay on the same page —> don’t do anything the function —> Builder method
+
+### Execution via Maven Command
+`mvn clean test -Dbrowser=Chrome`

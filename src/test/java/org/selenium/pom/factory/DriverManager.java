@@ -7,10 +7,19 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverManager {
     public WebDriver initializeDriver() {
-        /*WebDriverManager.chromedriver().cachePath("Drivers").setup();
-        WebDriver driver = new ChromeDriver();*/
-        WebDriverManager.firefoxdriver().cachePath("Drivers").setup();
-        WebDriver driver = new FirefoxDriver();
+        WebDriver driver;
+        String browser = System.getProperty("browser");
+        switch (browser) {
+            case "Chrome" -> {
+                WebDriverManager.chromedriver().cachePath("Drivers").setup();
+                driver = new ChromeDriver();
+            }
+            case "Firefox" -> {
+                WebDriverManager.firefoxdriver().cachePath("Drivers").setup();
+                driver = new FirefoxDriver();
+            }
+            default -> throw new IllegalArgumentException("Invalid Browser name " + browser);
+        }
         driver.manage().window().maximize();
         // driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         return driver;
