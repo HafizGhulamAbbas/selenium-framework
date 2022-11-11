@@ -1,4 +1,4 @@
-package org.selenium;
+package org.selenium.pom.tests;
 
 import org.selenium.pom.base.BaseTest;
 import org.selenium.pom.objects.BillingAddress;
@@ -26,6 +26,7 @@ public class AppTest extends BaseTest {
                 searchProduct(searchFor);
 
         Assert.assertEquals(storePage.getTitle(), "Search results: “" + searchFor + "”");
+        // Assert.assertTrue(storePage.getTitle().contains("Search results"));
         storePage.clickAddToCardButton(product.getName());
         CartPage cartPage = storePage.clickViewCart();
         Assert.assertEquals(cartPage.getProductName(), product.getName());
@@ -52,6 +53,7 @@ public class AppTest extends BaseTest {
                 navigateToStoreUsingMenu().
                 searchProduct(searchFor);
         Assert.assertEquals(storePage.getTitle(), "Search results: “" + searchFor + "”");
+        // Assert.assertTrue(storePage.getTitle().contains("Search results"));
 
         storePage.clickAddToCardButton(product.getName());
         CartPage cartPage = storePage.clickViewCart();
