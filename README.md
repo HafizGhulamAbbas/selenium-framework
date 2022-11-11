@@ -76,3 +76,10 @@ On HomePage, when click storeMenuLink, it loads the store page. We’re no more 
 
 ### Adding TestNG XML file
 https://testng.org/doc/documentation-main.html#testng-xml
+
+### Integrate testng.xml and maven CL
+https://maven.apache.org/surefire/maven-surefire-plugin/examples/testng.html
+
+- Now simply run: `mvn clean test`. It will execute the testng.xml file.
+- Execute multiple .xml files using usnig maven command line `mvn clean test -Dsurefire.suiteXmlFiles=testng.xml,testng_ff.xml`
+- Give suiteFile using maven command: `mvn clean test -DsuiteFile=testng_ff.xml`
