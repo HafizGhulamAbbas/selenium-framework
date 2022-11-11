@@ -4,17 +4,18 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.selenium.pom.constants.DriverType;
 
 public class DriverManager {
     public WebDriver initializeDriver() {
         WebDriver driver;
         String browser = System.getProperty("browser");
-        switch (browser) {
-            case "Chrome" -> {
+        switch (DriverType.valueOf(browser.toLowerCase())) {
+            case CHROME -> {
                 WebDriverManager.chromedriver().cachePath("Drivers").setup();
                 driver = new ChromeDriver();
             }
-            case "Firefox" -> {
+            case FIREFOX -> {
                 WebDriverManager.firefoxdriver().cachePath("Drivers").setup();
                 driver = new FirefoxDriver();
             }
