@@ -5,6 +5,7 @@
         <!--<packages>
             <package name="org.selenium.pom.tests" />
         </packages>-->
+        <parameter name="browser" value="FIREFOX"></parameter>
         <classes>
             <class name="org.selenium.pom.tests.AppTest"/>
         </classes>

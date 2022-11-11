@@ -7,9 +7,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.selenium.pom.constants.DriverType;
 
 public class DriverManager {
-    public WebDriver initializeDriver() {
+    public WebDriver initializeDriver(String browser) {
         WebDriver driver;
-        String browser = System.getProperty("browser", "CHROME");
+        browser = System.getProperty("browser", browser);
         switch (DriverType.valueOf(browser)) {
             case CHROME -> {
                 WebDriverManager.chromedriver().cachePath("Drivers").setup();
