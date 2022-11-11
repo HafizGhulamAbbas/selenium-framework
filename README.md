@@ -73,3 +73,6 @@ On HomePage, when click storeMenuLink, it loads the store page. We’re no more 
 
 ### Execution via Maven Command
 `mvn clean test -Dbrowser=Chrome`
+
+### Adding TestNG XML file
+https://testng.org/doc/documentation-main.html#testng-xml
