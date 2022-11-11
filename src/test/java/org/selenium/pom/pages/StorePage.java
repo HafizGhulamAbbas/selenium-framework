@@ -22,6 +22,11 @@ public class StorePage extends BasePage {
         return this;
     }
     public String getTitle() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return wait.until(ExpectedConditions.visibilityOfElementLocated(title)).getText();
     }
     private By getAddToCartButtonElement(String productName) {

@@ -1,6 +1,7 @@
 package org.selenium.pom.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -25,6 +26,8 @@ public class CheckoutPage extends BasePage {
     private final By overlay = By.cssSelector(".blockUI.blockOverlay");
     private final By countryDropdown = By.id("billing_country");
     private final By stateDropdown = By.id("billing_state");
+    private final By alternateCountryDropdown = By.id("select2-billing_country-container");
+    private final By alternateStateDropdown = By.id("select2-billing_state-container");
     private final By directBankTransferRadioButton = By.id("payment_method_bacs");
     public CheckoutPage(WebDriver driver) {
         super(driver);
@@ -43,8 +46,13 @@ public class CheckoutPage extends BasePage {
         return this;
     }
     public CheckoutPage selectCountry(String countryName) {
-        Select select = new Select(driver.findElement(countryDropdown));
-        select.selectByVisibleText(countryName);
+        /*Select select = new Select(wait.until(ExpectedConditions.elementToBeClickable(countryDropdown)));
+        select.selectByVisibleText(countryName);*/
+        wait.until(ExpectedConditions.elementToBeClickable(alternateCountryDropdown)).click();
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//li[text()='" + countryName + "']")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        element.click();
         return this;
     }
 
@@ -59,8 +67,13 @@ public class CheckoutPage extends BasePage {
         return this;
     }
     public CheckoutPage selectState(String stateName) {
-        Select select = new Select(driver.findElement(stateDropdown));
-        select.selectByVisibleText(stateName);
+        /*Select select = new Select(driver.findElement(stateDropdown));
+        select.selectByVisibleText(stateName);*/
+        wait.until(ExpectedConditions.elementToBeClickable(alternateStateDropdown)).click();
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//li[text()='" + stateName + "']")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        element.click();
         return this;
     }
     public CheckoutPage enterPostCode(String postCode) {
