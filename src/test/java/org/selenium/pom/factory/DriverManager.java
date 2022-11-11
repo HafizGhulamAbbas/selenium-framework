@@ -9,8 +9,8 @@ import org.selenium.pom.constants.DriverType;
 public class DriverManager {
     public WebDriver initializeDriver() {
         WebDriver driver;
-        String browser = System.getProperty("browser");
-        switch (DriverType.valueOf(browser.toLowerCase())) {
+        String browser = System.getProperty("browser", "CHROME");
+        switch (DriverType.valueOf(browser)) {
             case CHROME -> {
                 WebDriverManager.chromedriver().cachePath("Drivers").setup();
                 driver = new ChromeDriver();
